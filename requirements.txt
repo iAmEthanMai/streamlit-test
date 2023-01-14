@@ -1,0 +1,8 @@
+geopandas==0.9.1
+matplotlib==3.2.2
+networkx==2.5
+numpy==1.19.4
+osmnx==0.17
+pandas==1.1.4
+rtree==0.9.4
+shapely==1.7.1
