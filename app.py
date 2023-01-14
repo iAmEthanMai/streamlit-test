@@ -22,6 +22,9 @@ view_state_austin = pdk.ViewState(
         longitude=-97.7431,
         zoom=10
     )
+r = pdk.Deck(layers=[], initial_view_state=view_state_austin, tooltip={})
+    
+
 
 
 
