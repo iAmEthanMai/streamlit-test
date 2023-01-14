@@ -17,14 +17,7 @@ st.markdown(hide_menu_style, unsafe_allow_html=True)
 
 
 
-#set page config
-st.set_page_config(
 
-    page_title="Pipedream Network Editor",
-    #page_icon="app/assets/icon.svg",
-    #layout="wide",
-    initial_sidebar_state="expanded",
-)
 
 
 #make tab menu
