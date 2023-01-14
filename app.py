@@ -1,6 +1,7 @@
 import streamlit as st
 import osmnx as ox
 import pydeck as pdk
+import pandas as pd
 
 hide_menu_style = """
         <style>
@@ -17,13 +18,4 @@ st.markdown(hide_menu_style, unsafe_allow_html=True)
 st.write('hello world')
 st.write('this is a test')
 
-view_state_austin = pdk.ViewState(
-        latitude=30.2672,
-        longitude=-97.7431,
-        zoom=10
-    )
-r = pdk.Deck(initial_view_state=view_state_austin)
-    
 
-
-st.pydeck_chart(r)
