@@ -1,6 +1,6 @@
 import streamlit as st
 import osmnx as ox
-
+import pydeck as pdk
 
 hide_menu_style = """
         <style>
@@ -17,6 +17,4 @@ st.markdown(hide_menu_style, unsafe_allow_html=True)
 st.write('hello world')
 st.write('this is a test')
 
-node = ox.distance.get_nearest_nodes(G, (37.788022, -122.399797))
-st.write(node)
 
