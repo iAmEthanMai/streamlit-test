@@ -1,5 +1,5 @@
 import streamlit as st
-import osmnx as os
+
 
 
 hide_menu_style = """
