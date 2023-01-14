@@ -17,3 +17,11 @@ st.markdown(hide_menu_style, unsafe_allow_html=True)
 st.write('hello world')
 st.write('this is a test')
 
+node = ox.get_nearest_node(G, (37.788022, -122.399797))
+
+# get the latitude and longitude of the node
+lat, lon = ox.get_node_lat_lon(G, node)
+
+st.write(lat)
+st.write(lon)
+
