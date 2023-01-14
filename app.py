@@ -26,5 +26,4 @@ r = pdk.Deck(layers=[], initial_view_state=view_state_austin, tooltip={})
     
 
 
-
-
+st.pydeck_chart(r)
