@@ -286,8 +286,8 @@ if page == "Montreal":
                     latB = st.session_state.node_df[st.session_state.node_df['id'] == nodeB]['position'].values[0][1]
                     lonB = st.session_state.node_df[st.session_state.node_df['id'] == nodeB]['position'].values[0][0]
 
-                    source = ox.distance.nearest_nodes(G, lonA, latA)
-                    destination = ox.distance.nearest_nodes(G, lonB, latB)
+                    source = ox.nearest_nodes(G, lonA, latA)
+                    destination = ox.nearest_nodes(G, lonB, latB)
                     path = nx.shortest_path(G, source, destination, weight='length')
 
                     #update df id color path
