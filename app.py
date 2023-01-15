@@ -39,11 +39,18 @@ PIPE_COST = 10 #$/m
 #    #load the graph
 #    return nx.read_gpickle('montreal_graph.pickle')
 
-
-
+@st.cache(suppress_st_warning=True)
+def init():
+    time.sleep(10)
+    st.write('Done!')
+    #print the current time
+    st.write('Current time: {}'.format(time.time()))
 #G = ox.graph_from_place('Montreal, Quebec, Canada')
 
-G = nx.read_gpickle('montreal_graph.pickle')
+init()
+
+
+#G = nx.read_gpickle('montreal_graph.pickle')
 
 
 #print the number of nodes
