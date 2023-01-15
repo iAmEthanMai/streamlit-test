@@ -41,9 +41,9 @@ PIPE_COST = 10 #$/m
 
 
 
-G = ox.graph_from_place('Montreal, Quebec, Canada')
+#G = ox.graph_from_place('Montreal, Quebec, Canada')
 
-
+G = nx.read_gpickle('montreal_graph.pickle')
 
 
 #print the number of nodes
