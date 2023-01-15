@@ -281,6 +281,28 @@ if page == "Montreal":
             #check if nodeA and nodeB are different
             if nodeA != nodeB:
                 if st.form_submit_button('Add pipe'):
+                    latA = st.session_state.node_df[st.session_state.node_df['id'] == nodeA]['position'].values[0][1]
+                    lonA = st.session_state.node_df[st.session_state.node_df['id'] == nodeA]['position'].values[0][0]
+                    latB = st.session_state.node_df[st.session_state.node_df['id'] == nodeB]['position'].values[0][1]
+                    lonB = st.session_state.node_df[st.session_state.node_df['id'] == nodeB]['position'].values[0][0]
+
+                    source = ox.distance.nearest_nodes(G, lonA, latA)
+                    destination = ox.distance.nearest_nodes(G, lonB, latB)
+                    path = nx.shortest_path(G, source, destination, weight='length')
+
+                    #update df id color path
+                    st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id, 'color': [0,255,0], 'path': path}, ignore_index=True)
+                    st.session_state.pipe_layer = pdk.Layer(
+                        "PathLayer",
+                        data=st.session_state.pipe_df,
+                        pickable=True,
+                        #make cursor pointy
+                        auto_highlight=True,
+                        get_path='path',
+                        get_color='color',
+                        get_width=200,
+                    )
+                    #st.session_state.total_cost += PIPE_COST
                     st.experimental_rerun()
             else:
                 if st.form_submit_button('Add pipe'):
