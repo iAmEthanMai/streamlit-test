@@ -34,10 +34,14 @@ NODE_COST = 1000
 PIPE_COST = 10 #$/m
 
 
+@st.cache(suppress_st_warning=True)
+def init_app():
+    #load the graph
+    return nx.read_gpickle('montreal_graph.pickle')
 
 
-#load the graph
-G = nx.read_gpickle('montreal_graph.pickle')
+G = init_app()
+
 #print the number of nodes
 st.write('Number of nodes: {}'.format(len(G.nodes())))
 
