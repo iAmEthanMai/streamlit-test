@@ -40,10 +40,15 @@ PIPE_COST = 10 #$/m
 #    return nx.read_gpickle('montreal_graph.pickle')
 
 
-#G = init_app()
+@st.cache(suppress_st_warning=True)
+def init():
+    G = ox.graph_from_place('Montreal, Quebec, Canada')
+
+
+init()
 
 #print the number of nodes
-st.write('Number of nodes: {}'.format(len(G.nodes())))
+#st.write('Number of nodes: {}'.format(len(G.nodes())))
 
 def display_elevation():
     st.write('Elevation profile')
