@@ -8,9 +8,9 @@ import pydeck as pdk
 import streamlit as st
 import time
 
-#import osmnx as ox
-#import pickle
-#import networkx as nx
+import osmnx as ox
+import pickle
+import networkx as nx
 
 
 #set page config
@@ -36,7 +36,8 @@ PIPE_COST = 10 #$/m
 
 
 
-
+#load the graph
+G = nx.read_gpickle('montreal_graph.pickle')
 
 
 def display_elevation():
