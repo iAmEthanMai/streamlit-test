@@ -38,7 +38,8 @@ PIPE_COST = 10 #$/m
 
 #load the graph
 G = nx.read_gpickle('montreal_graph.pickle')
-
+#print the number of nodes
+st.write('Number of nodes: {}'.format(len(G.nodes())))
 
 def display_elevation():
     st.write('Elevation profile')
