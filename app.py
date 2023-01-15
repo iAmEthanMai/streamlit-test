@@ -147,18 +147,39 @@ if 'total_cost' not in st.session_state:
 
 def render_map():
 
-    view_state = pdk.ViewState(
-        latitude=45.5019,
-        longitude=-73.5674,
-        zoom=10
-    )
-
-
-
     
-    r = pdk.Deck(layers=[st.session_state.scatter_layer, st.session_state.path_layer], initial_view_state=view_state, tooltip={"text": "{id}"})
-    
-    st.pydeck_chart(r)
+    chart_data = pd.DataFrame(
+        np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
+        columns=['lat', 'lon'])
+
+    st.pydeck_chart(pdk.Deck(
+        map_style=None,
+        initial_view_state=pdk.ViewState(
+            latitude=37.76,
+            longitude=-122.4,
+            zoom=11,
+            pitch=50,
+        ),
+        layers=[
+            pdk.Layer(
+            'HexagonLayer',
+            data=chart_data,
+            get_position='[lon, lat]',
+            radius=200,
+            elevation_scale=4,
+            elevation_range=[0, 1000],
+            pickable=True,
+            extruded=True,
+            ),
+            pdk.Layer(
+                'ScatterplotLayer',
+                data=chart_data,
+                get_position='[lon, lat]',
+                get_color='[200, 30, 0, 160]',
+                get_radius=200,
+            ),
+        ],
+    ))
 
 
 #MainMenu {visibility: hidden;}
