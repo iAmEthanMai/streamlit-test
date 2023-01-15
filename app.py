@@ -39,15 +39,16 @@ PIPE_COST = 10 #$/m
 #    #load the graph
 #    return nx.read_gpickle('montreal_graph.pickle')
 
-@st.cache(suppress_st_warning=True)
-def init():
-    time.sleep(10)
-    st.write('Done!')
-    #print the current time
-    st.write('Current time: {}'.format(time.time()))
-#G = ox.graph_from_place('Montreal, Quebec, Canada')
 
-init()
+
+
+@st.cache(suppress_st_warning=True)
+def init_graph():
+    global G
+    G = nx.read_gpickle('montreal_graph.pickle')
+
+
+init_graph()
 
 
 #G = nx.read_gpickle('montreal_graph.pickle')
