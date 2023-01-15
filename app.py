@@ -55,7 +55,7 @@ init_graph()
 
 
 #print the number of nodes
-#st.write('Number of nodes: {}'.format(len(G.nodes())))
+st.write('Number of nodes: {}'.format(len(G.nodes())))
 
 def display_elevation():
     st.write('Elevation profile')
