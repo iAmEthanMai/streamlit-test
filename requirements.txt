@@ -2,3 +2,5 @@ streamlit==1.11.0
 osmnx==1.0.1
 shapely==1.8.5
 pydeck==0.7.1
+networkx==2.8.6
+
