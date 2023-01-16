@@ -117,7 +117,7 @@ def get_path(G, source, destination):
 
 
 
-if 'pipe_df' is not in st.session_state:
+if 'pipe_df' not in st.session_state:
     st.session_state.pipe_df = pd.DataFrame(data, columns=['id', 'color', 'path'])
     #st.session_state.pipe_df['color'] = st.session_state.pipe_df['color'].apply(hex_to_rgb)
 
