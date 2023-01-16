@@ -37,7 +37,7 @@ PIPE_COST = 10 #$/m
 
 @st.cache(suppress_st_warning=True)
 def load_graph():
-    sleep(5)
+    time.sleep(5)
     return 4
 
 number = load_graph()
