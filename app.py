@@ -89,10 +89,12 @@ path_coords = [[-73.6154152, 45.5228018], [-73.6150456, 45.523219], [-73.614842,
 data = [['PI0', '#5e29ff', []]]
 
 
+if st.session_state.pipe_df is None:
+    st.session_state.pipe_df = pd.DataFrame(data, columns=['id', 'color', 'path'])
+    #st.session_state.pipe_df['color'] = st.session_state.pipe_df['color'].apply(hex_to_rgb)
 
-df = pd.DataFrame(data, columns=['id', 'color', 'path'])
 
-df['color'] = df['color'].apply(hex_to_rgb)
+
 layer1 = pdk.Layer(
     type='PathLayer',
     data=df,
