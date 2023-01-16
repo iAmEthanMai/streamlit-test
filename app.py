@@ -89,11 +89,6 @@ path_coords = [[-73.6154152, 45.5228018], [-73.6150456, 45.523219], [-73.614842,
 data = [['PI0', '#5e29ff', []]]
 
 
-if st.session_state.pipe_df is None:
-    st.session_state.pipe_df = pd.DataFrame(data, columns=['id', 'color', 'path'])
-    #st.session_state.pipe_df['color'] = st.session_state.pipe_df['color'].apply(hex_to_rgb)
-
-
 
 layer1 = pdk.Layer(
     type='PathLayer',
@@ -121,6 +116,10 @@ def get_path(G, source, destination):
 
 
 
+
+if 'pipe_df' is not in st.session_state:
+    st.session_state.pipe_df = pd.DataFrame(data, columns=['id', 'color', 'path'])
+    #st.session_state.pipe_df['color'] = st.session_state.pipe_df['color'].apply(hex_to_rgb)
 
 
 if 'node_id_count' not in st.session_state:
