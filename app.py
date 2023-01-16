@@ -34,6 +34,16 @@ NODE_COST = 1000
 PIPE_COST = 10 #$/m
 
 
+
+@st.cache(suppress_st_warning=True)
+def load_graph():
+    sleep(5)
+    return 4
+
+number = load_graph()
+st.write(number)
+
+
 #@st.cache(suppress_st_warning=True)
 #def init_app():
 #    #load the graph
