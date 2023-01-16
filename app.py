@@ -40,12 +40,12 @@ PIPE_COST = 10 #$/m
 #    return nx.read_gpickle('montreal_graph.pickle')
 
 
-@st.cache(suppress_st_warning=True)
-def load_graph():
-    return nx.read_gpickle('montreal_graph.pickle')
-
-G = load_graph()
-st.write('Number of nodes: {}'.format(len(G.nodes())))
+#@st.cache(suppress_st_warning=True)
+#def load_graph():
+#    return nx.read_gpickle('montreal_graph.pickle')
+#
+#G = load_graph()
+#st.write('Number of nodes: {}'.format(len(G.nodes())))
 
 
 
@@ -86,7 +86,7 @@ path_coords = [[-73.6154152, 45.5228018], [-73.6150456, 45.523219], [-73.614842,
 
 
 
-data = [['PI0', '#5e29ff', path_coords]]
+data = [['PI0', '#5e29ff', []]]
 
 
 
@@ -273,17 +273,18 @@ if page == "Montreal":
             #check if nodeA and nodeB are different
             if nodeA != nodeB:
                 if st.form_submit_button('Add pipe'):
-                    latA = st.session_state.node_df[st.session_state.node_df['id'] == nodeA]['position'].values[0][1]
-                    lonA = st.session_state.node_df[st.session_state.node_df['id'] == nodeA]['position'].values[0][0]
-                    latB = st.session_state.node_df[st.session_state.node_df['id'] == nodeB]['position'].values[0][1]
-                    lonB = st.session_state.node_df[st.session_state.node_df['id'] == nodeB]['position'].values[0][0]
-
-                    source = ox.get_nearest_node(G, (lonA, latA))
-                    destination = ox.get_nearest_node(G, (lonB, latB))
-                    path = nx.shortest_path(G, source, destination, weight='length')
+                    #latA = st.session_state.node_df[st.session_state.node_df['id'] == nodeA]['position'].values[0][1]
+                    #lonA = st.session_state.node_df[st.session_state.node_df['id'] == nodeA]['position'].values[0][0]
+                    #latB = st.session_state.node_df[st.session_state.node_df['id'] == nodeB]['position'].values[0][1]
+                    #lonB = st.session_state.node_df[st.session_state.node_df['id'] == nodeB]['position'].values[0][0]
+#
+                    #source = ox.get_nearest_node(G, (lonA, latA))
+                    #destination = ox.get_nearest_node(G, (lonB, latB))
+                    #path = nx.shortest_path(G, source, destination, weight='length')
+                    
 
                     #update df id color path
-                    st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id, 'color': [0,255,0], 'path': path}, ignore_index=True)
+                    st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id, 'color': [0,255,0], 'path': path_coords}, ignore_index=True)
                     st.session_state.pipe_layer = pdk.Layer(
                         "PathLayer",
                         data=st.session_state.pipe_df,
@@ -379,140 +380,4 @@ elif page == "Austin":
     
     st.pydeck_chart(r)
     
-
-
-#
-##G = nx.read_gpickle('montreal_graph.pickle')
-#G = ox.graph_from_place('Montreal, Quebec, Canada')
-#
-#
-#print('so far so good')
-#
-## get the node closest to coordinates
-#nodeB = ox.nearest_nodes(G, -73.597650,45.522920)
-#nodeA = ox.nearest_nodes(G, -73.615480,45.522560)
-#
-#
-#
-#lat_nodeA = G.nodes[nodeA]['y']
-#lon_nodeA = G.nodes[nodeA]['x']
-#
-#
-#lat_nodeB = G.nodes[nodeB]['y']
-#lon_nodeB = G.nodes[nodeB]['x']
-#
-#
-##find the shortest path between the nodeA and nodeB
-#pathAB = nx.shortest_path(G, source=nodeA, target=nodeB, weight='length')
-#
-#
-## Define the list of node IDs
-#
-## Create an empty list to store the coordinates
-#coords = []
-#
-## Iterate over the node IDs
-#for node_id in pathAB:
-#    # Get the attributes of the node
-#    node_attr = G.nodes[node_id]
-#    
-#    # Get the latitude and longitude coordinates
-#    lat = node_attr['y']
-#    lon = node_attr['x']
-#    
-#    # Append the coordinates to the list
-#    coords.append([lon, lat])
-#
-#data = [['pipe1', '#ed1c24', coords]]
-#
-#
-#
-#df = pd.DataFrame(data, columns=['name', 'color', 'path'])
-#
-#
-#
-#
-#
-#st.dataframe(df)
-#
-#def hex_to_rgb(h):
-#    h = h.lstrip('#')
-#    return tuple(int(h[i:i+2], 16) for i in (0, 2, 4))
-#
-#df['color'] = df['color'].apply(hex_to_rgb)
-#
-#view_state = pdk.ViewState(
-#    latitude=45.5019,
-#    longitude=-73.5674,
-#    zoom=10
-#)
-#
-#
-#
-#
-#
-#data1 = [[[lon_nodeA,lat_nodeA], '#00FF00'],[[lon_nodeB,lat_nodeB], '#00FF00']]
-#data2 = pd.DataFrame(data1, columns=['position','color'])
-#data2['color'] = data2['color'].apply(hex_to_rgb)
-#
-#
-#
-#layer1 = pdk.Layer(
-#    type='PathLayer',
-#    data=df,
-#    pickable=True,
-#    get_color='color',
-#    width_scale=20,
-#    width_min_pixels=2,
-#    get_path='path',
-#    get_width=5,
-#)
-#
-#layer2 = pdk.Layer(
-#    type='ScatterplotLayer',
-#    data=data2,
-#    get_position='position',
-#    get_color='color',
-#    get_radius=100,
-#    
-#)
-#
-#
-#
-#
-#
-##
-##
-##svg_icon = {
-##    "url": "assets/icon.svg",
-##    "width": 20,
-##    "height": 20
-##}
-##
-##layer2 = pdk.Layer(
-##    type='ScatterplotLayer',
-##    data=data2,
-##    get_position='position',
-##    get_color='color',
-##    get_radius=100,
-##    # Set the icon property with the SVG icon dictionary
-##    icon=svg_icon
-##)
-##
-#
-#
-#r = pdk.Deck(layers=[layer2,layer1], initial_view_state=view_state, tooltip={'text': '{name}'})
-#
-#st.pydeck_chart(r)
-#
-
-
-
-
-
-
-
-
-
-
 
