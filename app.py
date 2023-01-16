@@ -333,7 +333,21 @@ if page == "Montreal":
 
         #wait for user to press enter
         if st.button('Delete pipe', key='tab4'):
-            st.success(f'Pipe: {pipe_id} deleted')
+            
+            #TODO delete pipes contected to node
+            st.session_state.pipe_df = st.session_state.pipe_df[st.session_state.pipe_df['id'] != pipe_id]
+            st.session_state.total_cost -= PIPE_COST
+            st.session_state.path_layer = pdk.Layer(
+                "PathLayer",
+                data=st.session_state.pipe_df,
+                pickable=True,
+                #make cursor pointy
+                auto_highlight=True,
+                get_path='path',
+                get_color='color',
+                get_width=200,
+            )
+            st.experimental_rerun()
 
     with tab5:
         uploaded_file = st.file_uploader("Choose a network config file")
