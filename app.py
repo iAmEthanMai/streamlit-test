@@ -247,6 +247,7 @@ if page == "Montreal":
                         get_radius=200,
                     )
                     st.write(number)
+                    time.sleep(3)
                     st.experimental_rerun()
 
 
