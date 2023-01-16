@@ -28,6 +28,18 @@ st.sidebar.title('Pipedream Networks')
 page = st.sidebar.radio("", ["Montreal", "Austin"])
 
 
+hide_menu_style = """
+        <style>
+        
+        footer {visibility: hidden;}
+        .css-1dp5vir {visibility: hidden;}
+        .reportview-container {background: #AE8F00}
+        </style>
+        """
+st.markdown(hide_menu_style, unsafe_allow_html=True)
+
+
+
 
 
 NODE_COST = 1000
@@ -186,18 +198,6 @@ def render_map():
 
 
 #MainMenu {visibility: hidden;}
-
-hide_menu_style = """
-        <style>
-        
-        footer {visibility: hidden;}
-        .css-1dp5vir {visibility: hidden;}
-        .reportview-container {background: #AE8F00}
-        </style>
-        """
-st.markdown(hide_menu_style, unsafe_allow_html=True)
-
-
 
 
 
