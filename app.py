@@ -40,7 +40,7 @@ PIPE_COST = 10 #$/m
 #    return nx.read_gpickle('montreal_graph.pickle')
 
 
-
+G = None
 
 @st.cache(suppress_st_warning=True)
 def init_graph():
@@ -48,7 +48,10 @@ def init_graph():
     G = nx.read_gpickle('montreal_graph.pickle')
 
 
-init_graph()
+#on reload, load the graph
+
+if G is None:
+    init_graph()
 
 
 #G = nx.read_gpickle('montreal_graph.pickle')
