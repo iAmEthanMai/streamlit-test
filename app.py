@@ -169,7 +169,6 @@ def render_map():
     )
 
 
-
     
     r = pdk.Deck(layers=[st.session_state.scatter_layer, st.session_state.path_layer], initial_view_state=view_state, tooltip={"text": "{id}"})
     
@@ -198,7 +197,6 @@ st.markdown(hide_menu_style, unsafe_allow_html=True)
 if page == "Montreal":
 
 
-    st.dataframe(st.session_state.pipe_df)
     
     render_map()
     
@@ -290,7 +288,7 @@ if page == "Montreal":
 
                     #update df id color path
                     st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id, 'color': [0,255,0], 'path': path_coords}, ignore_index=True)
-                    st.session_state.pipe_layer = pdk.Layer(
+                    st.session_state.path_layer = pdk.Layer(
                         "PathLayer",
                         data=st.session_state.pipe_df,
                         pickable=True,
