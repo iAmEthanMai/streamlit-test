@@ -198,7 +198,7 @@ st.markdown(hide_menu_style, unsafe_allow_html=True)
 if page == "Montreal":
 
 
-    st.write(st.session_state.pipe_df)
+    st.dataframe(st.session_state.pipe_df)
     
     render_map()
     
