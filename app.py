@@ -28,18 +28,6 @@ st.sidebar.title('Pipedream Networks')
 page = st.sidebar.radio("", ["Montreal", "Austin"])
 
 
-hide_menu_style = """
-        <style>
-        
-        footer {visibility: hidden;}
-        .css-1dp5vir {visibility: hidden;}
-        .reportview-container {background: #AE8F00}
-        </style>
-        """
-st.markdown(hide_menu_style, unsafe_allow_html=True)
-
-
-
 
 
 NODE_COST = 1000
@@ -49,7 +37,8 @@ PIPE_COST = 10 #$/m
 
 @st.cache(suppress_st_warning=True)
 def load_graph():
-    return nx.read_gpickle('montreal_graph.pickle')
+    #return nx.read_gpickle('montreal_graph.pickle')
+    return ox.get_graph_from_place('Montreal, Quebec, Canada')
     
 
 G = load_graph()
@@ -198,6 +187,18 @@ def render_map():
 
 
 #MainMenu {visibility: hidden;}
+
+hide_menu_style = """
+        <style>
+        
+        footer {visibility: hidden;}
+        .css-1dp5vir {visibility: hidden;}
+        .reportview-container {background: #AE8F00}
+        </style>
+        """
+st.markdown(hide_menu_style, unsafe_allow_html=True)
+
+
 
 
 
