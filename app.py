@@ -246,6 +246,7 @@ if page == "Montreal":
                         get_color='color',
                         get_radius=200,
                     )
+                    st.write(number)
                     st.experimental_rerun()
 
 
