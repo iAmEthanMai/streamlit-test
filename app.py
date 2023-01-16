@@ -90,18 +90,6 @@ data = [['PI0', '#5e29ff', []]]
 
 
 
-layer1 = pdk.Layer(
-    type='PathLayer',
-    data=df,
-    pickable=True,
-    get_color='color',
-    width_scale=20,
-    width_min_pixels=2,
-    get_path='path',
-    get_width=5,
-    auto_highlight=True,
-)
-
 
 
 
@@ -140,6 +128,22 @@ if 'scatter_layer' not in st.session_state:
         get_color='color',
         get_radius=200,
     )
+
+
+
+
+
+layer1 = pdk.Layer(
+    type='PathLayer',
+    data=st.session_state.pipe_df,
+    pickable=True,
+    get_color='color',
+    width_scale=20,
+    width_min_pixels=2,
+    get_path='path',
+    get_width=5,
+    auto_highlight=True,
+)
 
 if 'path_layer' not in st.session_state:
     st.session_state.path_layer = layer1
