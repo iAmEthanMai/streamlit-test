@@ -37,11 +37,11 @@ PIPE_COST = 10 #$/m
 
 @st.cache(suppress_st_warning=True)
 def load_graph():
-    time.sleep(5)
-    return 4
+    return nx.read_gpickle('montreal_graph.pickle')
+    
 
-number = load_graph()
-st.write(number)
+G = load_graph()
+st.write(len(G))
 
 
 #@st.cache(suppress_st_warning=True)
@@ -246,7 +246,7 @@ if page == "Montreal":
                         get_color='color',
                         get_radius=200,
                     )
-                    st.write(number)
+                    st.write(len(G))
                     time.sleep(3)
                     st.experimental_rerun()
 
