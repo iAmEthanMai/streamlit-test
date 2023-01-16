@@ -251,7 +251,7 @@ if page == "Montreal":
             with col2:
                 nodeB = st.selectbox('Destination', st.session_state.node_df['id'])
             with col3:
-                pipe_id = st.text_input('Pipe ID', value='PI1')
+                pipe_id = st.text_input('Pipe ID', value='PI' + str(st.session_state.pipe_count))
             with col4:
                 color = st.color_picker('Colour', value='#5E29FF')
                 color = hex_to_rgb(color)
