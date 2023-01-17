@@ -200,14 +200,14 @@ st.markdown(hide_menu_style, unsafe_allow_html=True)
 
 
 
+G = load_graph()
+st.write(len(G))
 
 
 
 if page == "Montreal":
 
 
-    G = load_graph()
-    st.write(len(G))
     
     render_map()
     
