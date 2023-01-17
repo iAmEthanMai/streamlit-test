@@ -35,14 +35,12 @@ PIPE_COST = 10 #$/m
 
 
 
-#@st.cache(suppress_st_warning=True)
-#def load_graph():
-#    #return nx.read_gpickle('montreal_graph.pickle')
-#    return ox.get_graph_from_place('Montreal, Quebec, Canada')
-#    
-#
-#G = load_graph()
-#st.write(len(G))
+@st.cache(suppress_st_warning=True)
+def load_graph():
+    #return nx.read_gpickle('montreal_graph.pickle')
+    return ox.get_graph_from_place('Montreal, Quebec, Canada')
+    
+
 
 
 #@st.cache(suppress_st_warning=True)
@@ -208,6 +206,8 @@ st.markdown(hide_menu_style, unsafe_allow_html=True)
 if page == "Montreal":
 
 
+    G = load_graph()
+    st.write(len(G))
     
     render_map()
     
