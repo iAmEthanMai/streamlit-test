@@ -37,13 +37,10 @@ PIPE_COST = 10 #$/m
 
 @st.cache(suppress_st_warning=True)
 def load_graph():
-    #return nx.read_gpickle('montreal_graph.pickle')
-    return ox.get_graph_from_place('Montreal, Quebec, Canada')
+    return nx.read_gpickle('montreal_graph.pickle')
+    #return ox.get_graph_from_place('Montreal, Quebec, Canada')
     
 
-
-G = load_graph()
-st.write(len(G))
 
 #@st.cache(suppress_st_warning=True)
 #def init_app():
@@ -207,6 +204,9 @@ if page == "Montreal":
 
 
     
+
+    G = load_graph()
+    st.write(len(G))
     render_map()
     
     tab1, tab2, tab3, tab4, tab5 = st.tabs(["Add node", "Add pipe", "Delete node", "Delete pipe", "Load config"])
