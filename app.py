@@ -42,6 +42,8 @@ def load_graph():
     
 
 
+G = load_graph()
+st.write(len(G))
 
 #@st.cache(suppress_st_warning=True)
 #def init_app():
@@ -198,10 +200,6 @@ st.markdown(hide_menu_style, unsafe_allow_html=True)
 
 
 
-
-
-G = load_graph()
-st.write(len(G))
 
 
 
