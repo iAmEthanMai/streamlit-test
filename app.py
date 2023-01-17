@@ -246,7 +246,7 @@ if page == "Montreal":
                         get_color='color',
                         get_radius=200,
                     )
-                    st.write(len(G))
+                    st.write(len(st.session_state.G))
                     time.sleep(3)
                     st.experimental_rerun()
 
