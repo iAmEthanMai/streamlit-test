@@ -298,8 +298,9 @@ if page == "Montreal":
                     #source = ox.get_nearest_node(G, (lonA, latA))
                     #destination = ox.get_nearest_node(G, (lonB, latB))
                     #path = nx.shortest_path(G, source, destination, weight='length')
-                    
-                    path = nx.shortest_path(st.session_state.G, nodeA, nodeB, weight='length')
+                    source = ox.distance.nearest_nodes(st.session_state.G, lonA, latA)
+                    destination = ox.distance.nearest_nodes(st.session_state.G, lonB, latB)
+                    path = nx.shortest_path(st.session_state.G, source, destination, weight='length')
                     st.write(path)
                     sleep(5)
 
