@@ -290,14 +290,12 @@ if page == "Montreal":
             #check if nodeA and nodeB are different
             if nodeA != nodeB:
                 if st.form_submit_button('Add pipe'):
-                    #latA = st.session_state.node_df[st.session_state.node_df['id'] == nodeA]['position'].values[0][1]
-                    #lonA = st.session_state.node_df[st.session_state.node_df['id'] == nodeA]['position'].values[0][0]
-                    #latB = st.session_state.node_df[st.session_state.node_df['id'] == nodeB]['position'].values[0][1]
-                    #lonB = st.session_state.node_df[st.session_state.node_df['id'] == nodeB]['position'].values[0][0]
+                    latA = st.session_state.node_df[st.session_state.node_df['id'] == nodeA]['position'].values[0][1]
+                    lonA = st.session_state.node_df[st.session_state.node_df['id'] == nodeA]['position'].values[0][0]
+                    latB = st.session_state.node_df[st.session_state.node_df['id'] == nodeB]['position'].values[0][1]
+                    lonB = st.session_state.node_df[st.session_state.node_df['id'] == nodeB]['position'].values[0][0]
 #
-                    #source = ox.get_nearest_node(G, (lonA, latA))
-                    #destination = ox.get_nearest_node(G, (lonB, latB))
-                    #path = nx.shortest_path(G, source, destination, weight='length')
+
                     source = ox.distance.nearest_nodes(st.session_state.G, lonA, latA)
                     destination = ox.distance.nearest_nodes(st.session_state.G, lonB, latB)
                     path = nx.shortest_path(st.session_state.G, source, destination, weight='length')
