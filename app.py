@@ -331,7 +331,7 @@ if page == "Montreal":
                         auto_highlight=True,
                         get_path='path',
                         get_color='color',
-                        get_width=20,
+                        get_width=50,
                     )
                     #st.session_state.total_cost += PIPE_COST
                     st.experimental_rerun()
