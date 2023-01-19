@@ -39,8 +39,9 @@ PIPE_COST = 10 #$/m
 def load_graph():
     #return nx.read_gpickle('montreal_graph.pickle')
     #return ox.get_graph_from_place('Montreal, Quebec, Canada')
-    
-    return ox.load_graphml('simplified.graphml') 
+    G = nx.DiGraph()
+    return G
+    #return ox.load_graphml('simplified.graphml') 
     
 
 
@@ -296,8 +297,11 @@ if page == "Montreal":
                     lonB = st.session_state.node_df[st.session_state.node_df['id'] == nodeB]['position'].values[0][0]
 #
 
-                    source = ox.distance.nearest_nodes(st.session_state.G, lonA, latA)
+                    source = ox.get_nearest_node(st.session_state.G, (lonA, latA))
+                    
                     destination = ox.distance.nearest_nodes(st.session_state.G, lonB, latB)
+                    
+                    
                     path = nx.shortest_path(st.session_state.G, source, destination, weight='length')
                     st.write(path)
                     sleep(5)
