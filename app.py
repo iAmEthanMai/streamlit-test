@@ -230,7 +230,7 @@ if page == "Montreal":
     with tab1:
 
         with st.form(key='tab1'):
-            col1, col2, col3, col4 = st.columns(4)
+            col1, col2, col3, col4, col5 = st.columns(5)
             with col1:
                 lat = st.number_input('Latitude', min_value=0.0, max_value=90.0, value=45.532560)
             with col2:
@@ -240,6 +240,9 @@ if page == "Montreal":
             with col4:
                 color = st.color_picker('Colour', value='#5E29FF')
                 color = hex_to_rgb(color)
+            with col5:
+                size = st.number_input('Size', min_value=20, max_value=200, value=20)
+
             if st.form_submit_button('Add node'):
                 
                 #check if node is already at this location
@@ -258,7 +261,7 @@ if page == "Montreal":
                         auto_highlight=True,
                         get_position='position',
                         get_color='color',
-                        get_radius=200,
+                        get_radius=size,
                     )
 
                     st.experimental_rerun()
