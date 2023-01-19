@@ -192,7 +192,7 @@ def render_map():
 
 
     
-    r = pdk.Deck(layers=[st.session_state.scatter_layer, st.session_state.path_layer], initial_view_state=view_state, tooltip={"text": "{id}", "style": {"color": "white"}})
+    r = pdk.Deck(layers=[st.session_state.scatter_layer, st.session_state.path_layer], initial_view_state=view_state, tooltip={"text": "{id}, {length}m"})
     
     st.pydeck_chart(r)
 
