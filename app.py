@@ -314,7 +314,14 @@ if page == "Montreal":
                     
                     
                     path = nx.shortest_path(G, source, destination, weight='length')
-                    st.write(path)
+                    #st.write(path)
+                    path_coords = []
+                    for point in path:
+                        x, y = G.nodes[point]['x'], G.nodes[point]['y']
+                        path_coords.append([x, y])
+                    
+                    st.write(path_coords)
+
                     time.sleep(4)
 
                     #update df id color path
