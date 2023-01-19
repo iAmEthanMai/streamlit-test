@@ -128,7 +128,7 @@ def get_path(G, source, destination):
 
 
 if 'pipe_df' not in st.session_state:
-    st.session_state.pipe_df = pd.DataFrame([], columns=['id', 'color', 'path'])
+    st.session_state.pipe_df = pd.DataFrame([], columns=['id', 'color', 'path', 'length'])
     #st.session_state.pipe_df['color'] = st.session_state.pipe_df['color'].apply(hex_to_rgb)
 
 
@@ -192,7 +192,7 @@ def render_map():
 
 
     
-    r = pdk.Deck(layers=[st.session_state.scatter_layer, st.session_state.path_layer], initial_view_state=view_state, tooltip={"text": "{id}"})
+    r = pdk.Deck(layers=[st.session_state.scatter_layer, st.session_state.path_layer], initial_view_state=view_state, tooltip={"text": "{id}", "style": {"color": "white"}})
     
     st.pydeck_chart(r)
 
@@ -307,7 +307,7 @@ if page == "Montreal":
                     latA = st.session_state.node_df[st.session_state.node_df['id'] == nodeA]['position'].values[0][0]
                     lonB = st.session_state.node_df[st.session_state.node_df['id'] == nodeB]['position'].values[0][1]
                     latB = st.session_state.node_df[st.session_state.node_df['id'] == nodeB]['position'].values[0][0]
-#
+
 
                     source = ox.get_nearest_node(G, (lonA, latA))
                     
@@ -315,6 +315,7 @@ if page == "Montreal":
                     
                     
                     path = nx.shortest_path(G, source, destination, weight='length')
+                    length = nx.shortest_path_length(G, source, destination, weight='length')
                     #st.write(path)
                     path_coords = []
                     for point in path:
@@ -322,7 +323,7 @@ if page == "Montreal":
                         path_coords.append([x, y])
                     
                     #update df id color path
-                    st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id, 'color': color, 'path': path_coords}, ignore_index=True)
+                    st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id, 'color': color, 'path': path_coords, 'length': length}, ignore_index=True)
                     st.session_state.path_layer = pdk.Layer(
                         "PathLayer",
                         data=st.session_state.pipe_df,
