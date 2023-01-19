@@ -40,6 +40,16 @@ def load_graph():
     #return nx.read_gpickle('montreal_graph.pickle')
     #return ox.get_graph_from_place('Montreal, Quebec, Canada')
     G = nx.DiGraph()
+    G.add_node(1, x=0, y=0)
+    G.add_node(2, x=1, y=1)
+    G.add_node(3, x=2, y=2)
+    G.add_node(4, x=3, y=3)
+    G.add_node(5, x=4, y=4)
+
+    G.add_edge(1, 2, length=1)
+    G.add_edge(2, 3, length=1)
+    G.add_edge(3, 4, length=1)
+    G.add_edge(4, 5, length=1)
     return G
     #return ox.load_graphml('simplified.graphml') 
     
@@ -299,7 +309,7 @@ if page == "Montreal":
 
                     source = ox.get_nearest_node(st.session_state.G, (lonA, latA))
                     
-                    destination = ox.distance.nearest_nodes(st.session_state.G, lonB, latB)
+                    destination = ox.get_nearest_node(st.session_state.G, (lonB, latB))
                     
                     
                     path = nx.shortest_path(st.session_state.G, source, destination, weight='length')
