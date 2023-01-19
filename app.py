@@ -171,7 +171,7 @@ if page == "Montreal":
     #if 'G' not in st.session_state:
     #    st.session_state.G = load_graph()
 
-    st.write(len(G))
+    #st.write(len(G))
     render_map()
     
     tab1, tab2, tab3, tab4, tab5 = st.tabs(["Add node", "Add pipe", "Delete node", "Delete pipe", "Load config"])
