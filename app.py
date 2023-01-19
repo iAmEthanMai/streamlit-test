@@ -240,8 +240,7 @@ if page == "Montreal":
             with col4:
                 color = st.color_picker('Colour', value='#5E29FF')
                 color = hex_to_rgb(color)
-            with col5:
-                size = st.number_input('Size', min_value=20, max_value=200, value=20)
+            
 
             if st.form_submit_button('Add node'):
                 
@@ -261,7 +260,7 @@ if page == "Montreal":
                         auto_highlight=True,
                         get_position='position',
                         get_color='color',
-                        get_radius=size,
+                        get_radius=200,
                     )
 
                     st.experimental_rerun()
