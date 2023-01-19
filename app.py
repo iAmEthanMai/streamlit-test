@@ -261,7 +261,7 @@ if page == "Montreal":
                         get_radius=200,
                     )
                     st.write(len(G))
-                    time.sleep(3)
+                    time.sleep(1)
                     st.experimental_rerun()
 
 
@@ -315,7 +315,7 @@ if page == "Montreal":
                     
                     path = nx.shortest_path(G, source, destination, weight='length')
                     st.write(path)
-                    time.sleep(5)
+                    time.sleep(1)
 
                     #update df id color path
                     st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id, 'color': color, 'path': path_coords}, ignore_index=True)
