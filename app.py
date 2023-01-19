@@ -260,8 +260,7 @@ if page == "Montreal":
                         get_color='color',
                         get_radius=200,
                     )
-                    st.write(len(G))
-                    time.sleep(1)
+
                     st.experimental_rerun()
 
 
@@ -320,10 +319,6 @@ if page == "Montreal":
                         x, y = G.nodes[point]['x'], G.nodes[point]['y']
                         path_coords.append([x, y])
                     
-                    st.write(path_coords)
-
-                    time.sleep(4)
-
                     #update df id color path
                     st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id, 'color': color, 'path': path_coords}, ignore_index=True)
                     st.session_state.path_layer = pdk.Layer(
@@ -334,7 +329,7 @@ if page == "Montreal":
                         auto_highlight=True,
                         get_path='path',
                         get_color='color',
-                        get_width=200,
+                        get_width=20,
                     )
                     #st.session_state.total_cost += PIPE_COST
                     st.experimental_rerun()
