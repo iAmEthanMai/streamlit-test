@@ -258,7 +258,7 @@ if page == "Montreal":
                         auto_highlight=True,
                         get_position='position',
                         get_color='color',
-                        get_radius=200,
+                        get_radius=20,
                     )
 
                     st.experimental_rerun()
