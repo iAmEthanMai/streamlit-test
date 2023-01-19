@@ -313,9 +313,9 @@ if page == "Montreal":
                     destination = ox.get_nearest_node(G, (lonB, latB))
                     
                     
-                    path = nx.shortest_path(G, source, destination, weight='length')
-                    st.write(path)
-                    time.sleep(1)
+                    #path = nx.shortest_path(G, source, destination, weight='length')
+                    #st.write(path)
+                    #time.sleep(1)
 
                     #update df id color path
                     st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id, 'color': color, 'path': path_coords}, ignore_index=True)
