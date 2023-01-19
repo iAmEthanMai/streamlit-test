@@ -215,12 +215,12 @@ st.markdown(hide_menu_style, unsafe_allow_html=True)
 
 if page == "Montreal":
 
-
+    G = load_graph()
     
-    if 'G' not in st.session_state:
-        st.session_state.G = load_graph()
+    #if 'G' not in st.session_state:
+    #    st.session_state.G = load_graph()
 
-    st.write(len(st.session_state.G))
+    st.write(len(G))
     render_map()
     
     tab1, tab2, tab3, tab4, tab5 = st.tabs(["Add node", "Add pipe", "Delete node", "Delete pipe", "Load config"])
@@ -259,7 +259,7 @@ if page == "Montreal":
                         get_color='color',
                         get_radius=200,
                     )
-                    st.write(len(st.session_state.G))
+                    st.write(len(G))
                     time.sleep(3)
                     st.experimental_rerun()
 
@@ -307,14 +307,14 @@ if page == "Montreal":
                     lonB = st.session_state.node_df[st.session_state.node_df['id'] == nodeB]['position'].values[0][0]
 #
 
-                    source = ox.get_nearest_node(st.session_state.G, (lonA, latA))
+                    source = ox.get_nearest_node(G, (lonA, latA))
                     
-                    destination = ox.get_nearest_node(st.session_state.G, (lonB, latB))
+                    destination = ox.get_nearest_node(G, (lonB, latB))
                     
                     
-                    path = nx.shortest_path(st.session_state.G, source, destination, weight='length')
-                    st.write(path)
-                    time.sleep(5)
+                    path = nx.shortest_path(G, source, destination, weight='length')
+                    #st.write(path)
+                    #time.sleep(5)
 
                     #update df id color path
                     st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id, 'color': color, 'path': path_coords}, ignore_index=True)
