@@ -35,7 +35,7 @@ PIPE_COST = 10 #$/m
 
 
 
-@st.cache(suppress_st_warning=True)
+@st.cache(allow_output_mutation=True)
 def load_graph():
     time.sleep(5)
     #return nx.read_gpickle('montreal_graph.pickle')
@@ -313,9 +313,9 @@ if page == "Montreal":
                     destination = ox.get_nearest_node(G, (lonB, latB))
                     
                     
-                    #path = nx.shortest_path(G, source, destination, weight='length')
-                    #st.write(path)
-                    #time.sleep(1)
+                    path = nx.shortest_path(G, source, destination, weight='length')
+                    st.write(path)
+                    time.sleep(1)
 
                     #update df id color path
                     st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id, 'color': color, 'path': path_coords}, ignore_index=True)
