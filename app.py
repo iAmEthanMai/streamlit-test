@@ -37,38 +37,8 @@ PIPE_COST = 10 #$/m
 
 @st.cache(allow_output_mutation=True)
 def load_graph():
-    #time.sleep(5)
-    #return nx.read_gpickle('montreal_graph.pickle')
-    #return ox.get_graph_from_place('Montreal, Quebec, Canada')
-    #G = nx.DiGraph()
-    #G.add_node(1, x=0, y=0)
-    #G.add_node(2, x=1, y=1)
-    #G.add_node(3, x=2, y=2)
-    #G.add_node(4, x=3, y=3)
-    #G.add_node(5, x=4, y=4)
-#
-    #G.add_edge(1, 2, length=1)
-    #G.add_edge(2, 3, length=1)
-    #G.add_edge(3, 4, length=1)
-    #G.add_edge(4, 5, length=1)
-    #return G
     return ox.load_graphml('simplified.graphml') 
     
-
-
-#@st.cache(suppress_st_warning=True)
-#def init_app():
-#    #load the graph
-#    return nx.read_gpickle('montreal_graph.pickle')
-
-
-#@st.cache(suppress_st_warning=True)
-#def load_graph():
-#    return nx.read_gpickle('montreal_graph.pickle')
-#
-#G = load_graph()
-#st.write('Number of nodes: {}'.format(len(G.nodes())))
-
 
 
 def display_elevation():
@@ -92,36 +62,11 @@ def hex_to_rgb(h):
 
 
 data1 = [['Alice', [-73.597650,45.522920], [94, 41, 255],'None'],['Ethan',[-73.615480,45.522560], [94, 41, 255],'None']]
-#data2['color'] = data2['color'].apply(hex_to_rgb)
 
 
 
 
 
-
-
-#path = [221113177, 7017289706, 221113204, 221113274, 1968551667, 1818906521, 221106435, 31701022, 1968519515, 221106437, 867675395, 1825900796, 1818923469, 127962991, 1969845704, 437865929, 1969845669, 438331727, 1969845685, 340240112, 340239570, 3971845889, 3594666108]
-#
-#path_coords = [[-73.6154152, 45.5228018], [-73.6150456, 45.523219], [-73.614842, 45.5234489], [-73.6142856, 45.524077], [-73.6138297, 45.5238799], [-73.6129038, 45.5234795], [-73.6124261, 45.523269], [-73.6119569, 45.5237979], [-73.611709, 45.5240775], [-73.6114317, 45.5243844], [-73.6111397, 45.5247076], [-73.6108518, 45.5250262], [-73.6105335, 45.5253784], [-73.6101948, 45.5257533], [-73.609889, 45.526103], [-73.6095802, 45.5264562], [-73.6092626, 45.5267345], [-73.6088471, 45.5270204], [-73.6084223, 45.5272486], [-73.6041118, 45.5252418], [-73.6008161, 45.5237722], [-73.5985465, 45.5227497], [-73.5982829, 45.5230282]]
-
-
-
-
-#data = [['PI0', '#5e29ff', []]]
-
-
-
-
-
-
-
-
-
-
-def get_path(G, source, destination):
-    #find the shortest path between the nodeA and nodeB
-    path = nx.shortest_path(G, source=source, target=destination, weight='length')
-    return path
 
 
 
@@ -130,6 +75,9 @@ if 'pipe_df' not in st.session_state:
     st.session_state.pipe_df = pd.DataFrame([], columns=['id', 'color', 'path', 'length'])
     #st.session_state.pipe_df['color'] = st.session_state.pipe_df['color'].apply(hex_to_rgb)
 
+
+if 'total_length' not in st.session_state:
+    st.session_state.total_length = 0
 
 if 'node_id_count' not in st.session_state:
     st.session_state.node_id_count = 0
@@ -318,6 +266,8 @@ if page == "Montreal":
                     
                     path = nx.shortest_path(G, source, destination, weight='length')
                     length = nx.shortest_path_length(G, source, destination, weight='length')
+                    st.session_state.total_cost += length * PIPE_COST
+                    st.session_state.total_length += length
                     #st.write(path)
                     path_coords = []
                     for point in path:
@@ -407,13 +357,15 @@ if page == "Montreal":
 
     with st.expander('Network features'):
         
-        col1, col2, col3 = st.columns(3)
+        col1, col2, col3, col4 = st.columns(4)
         with col1:
             
             st.metric('Number of nodes: ', len(st.session_state.node_df))
         with col2:
-            st.metric("Number of pipes", 0)
+            st.metric("Number of pipes", len(st.session_state.pipe_df))
         with col3:
+            st.metric("Total length", str(round(st.session_state.total_length,0))+'m')
+        with col4:
             st.metric('Total cost: ', '$' + str(st.session_state.total_cost))
         
         st.download_button('Download network config', st.session_state.node_df.to_csv(), 'network_config.csv', 'text/csv')
