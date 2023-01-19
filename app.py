@@ -92,7 +92,6 @@ def hex_to_rgb(h):
 
 
 data1 = [['Alice', [-73.597650,45.522920], [94, 41, 255],'None'],['Ethan',[-73.615480,45.522560], [94, 41, 255],'None']]
-data2 = pd.DataFrame(data1, columns=['id','position','color', 'length'])
 #data2['color'] = data2['color'].apply(hex_to_rgb)
 
 
@@ -135,7 +134,7 @@ if 'pipe_df' not in st.session_state:
 if 'node_id_count' not in st.session_state:
     st.session_state.node_id_count = 0
 if 'node_df' not in st.session_state:
-    st.session_state.node_df = pd.DataFrame(data1, columns=['id','position','color'])
+    st.session_state.node_df = pd.DataFrame(data1, columns=['id','position','color','length'])
 
 if 'scatter_layer' not in st.session_state:
     st.session_state.scatter_layer = pdk.Layer(
