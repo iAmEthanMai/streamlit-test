@@ -91,8 +91,8 @@ def hex_to_rgb(h):
 
 
 
-data1 = [['Alice', [-73.597650,45.522920], [94, 41, 255]],['Ethan',[-73.615480,45.522560], [94, 41, 255]]]
-data2 = pd.DataFrame(data1, columns=['id','position','color'])
+data1 = [['Alice', [-73.597650,45.522920], [94, 41, 255],'None'],['Ethan',[-73.615480,45.522560], [94, 41, 255],'None']]
+data2 = pd.DataFrame(data1, columns=['id','position','color', 'length'])
 #data2['color'] = data2['color'].apply(hex_to_rgb)
 
 
@@ -192,9 +192,7 @@ def render_map():
 
 
     #tooltip id and length if you hover over a pipe
-    tooltip = {"html": "<b>ID:</b> {id} <br/> <b>Length:</b> {length} m", "style": {"color": "white"}}
-    #tooltip for the nodes
-    tooltip2 = {"html": "<b>ID:</b> {id}", "style": {"color": "white"}}
+    tooltip = {"html": "<b>ID:</b> {id} <br/> <b>Length:</b> {length}", "style": {"color": "white"}} 
     
     r = pdk.Deck(layers=[st.session_state.scatter_layer, st.session_state.path_layer], initial_view_state=view_state, tooltip=tooltip)
 
@@ -256,7 +254,7 @@ if page == "Montreal":
 
                     st.session_state.node_id_count += 1
                     st.session_state.total_cost += NODE_COST
-                    st.session_state.node_df = st.session_state.node_df.append({'id': node_id, 'position': [lon, lat], 'color': color}, ignore_index=True)
+                    st.session_state.node_df = st.session_state.node_df.append({'id': node_id, 'position': [lon, lat], 'color': color, 'length': 'None'}, ignore_index=True)
                     st.session_state.scatter_layer = pdk.Layer(
                         "ScatterplotLayer",
                         data=st.session_state.node_df,
@@ -328,7 +326,7 @@ if page == "Montreal":
                         path_coords.append([x, y])
                     
                     #update df id color path
-                    st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id, 'color': color, 'path': path_coords, 'length': length}, ignore_index=True)
+                    st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id, 'color': color, 'path': path_coords, 'length': length+'m'}, ignore_index=True)
                     st.session_state.path_layer = pdk.Layer(
                         "PathLayer",
                         data=st.session_state.pipe_df,
