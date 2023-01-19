@@ -357,7 +357,7 @@ if page == "Montreal":
 
     with st.expander('Network features'):
         
-        col1, col2, col3, col4 = st.columns(4)
+        col1, col2, col3 = st.columns(3)
         with col1:
             
             st.metric('Number of nodes: ', len(st.session_state.node_df))
@@ -365,7 +365,7 @@ if page == "Montreal":
             st.metric("Number of pipes", len(st.session_state.pipe_df))
         #with col3:
         #    st.metric("Total length", str(round(st.session_state.total_length,0))+'m')
-        with col4:
+        with col3:
             #cost with commas
             st.metric("Total cost", f"${st.session_state.total_cost:,.2f}")
         
