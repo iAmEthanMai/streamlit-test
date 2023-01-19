@@ -37,22 +37,22 @@ PIPE_COST = 10 #$/m
 
 @st.cache(allow_output_mutation=True)
 def load_graph():
-    time.sleep(5)
+    #time.sleep(5)
     #return nx.read_gpickle('montreal_graph.pickle')
     #return ox.get_graph_from_place('Montreal, Quebec, Canada')
-    G = nx.DiGraph()
-    G.add_node(1, x=0, y=0)
-    G.add_node(2, x=1, y=1)
-    G.add_node(3, x=2, y=2)
-    G.add_node(4, x=3, y=3)
-    G.add_node(5, x=4, y=4)
-
-    G.add_edge(1, 2, length=1)
-    G.add_edge(2, 3, length=1)
-    G.add_edge(3, 4, length=1)
-    G.add_edge(4, 5, length=1)
-    return G
-    #return ox.load_graphml('simplified.graphml') 
+    #G = nx.DiGraph()
+    #G.add_node(1, x=0, y=0)
+    #G.add_node(2, x=1, y=1)
+    #G.add_node(3, x=2, y=2)
+    #G.add_node(4, x=3, y=3)
+    #G.add_node(5, x=4, y=4)
+#
+    #G.add_edge(1, 2, length=1)
+    #G.add_edge(2, 3, length=1)
+    #G.add_edge(3, 4, length=1)
+    #G.add_edge(4, 5, length=1)
+    #return G
+    return ox.load_graphml('simplified.graphml') 
     
 
 
@@ -315,7 +315,7 @@ if page == "Montreal":
                     
                     path = nx.shortest_path(G, source, destination, weight='length')
                     st.write(path)
-                    time.sleep(1)
+                    time.sleep(4)
 
                     #update df id color path
                     st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id, 'color': color, 'path': path_coords}, ignore_index=True)
