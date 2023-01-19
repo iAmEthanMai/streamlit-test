@@ -366,7 +366,8 @@ if page == "Montreal":
         with col3:
             st.metric("Total length", str(round(st.session_state.total_length,0))+'m')
         with col4:
-            st.metric('Total cost: ', '$' + str(st.session_state.total_cost))
+            #cost with commas
+            st.metric("Total cost", f"${st.session_state.total_cost:,.2f}")
         
         st.download_button('Download network config', st.session_state.node_df.to_csv(), 'network_config.csv', 'text/csv')
 
