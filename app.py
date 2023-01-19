@@ -308,9 +308,9 @@ if page == "Montreal":
                     lonB = st.session_state.node_df[st.session_state.node_df['id'] == nodeB]['position'].values[0][0]
 #
 
-                    source = ox.get_nearest_node(G, (lonA, latA))
+                    source = ox.get_nearest_node(G, (latA, lonA))
                     
-                    destination = ox.get_nearest_node(G, (lonB, latB))
+                    destination = ox.get_nearest_node(G, (latB, lonB))
                     
                     
                     path = nx.shortest_path(G, source, destination, weight='length')
