@@ -325,7 +325,7 @@ if page == "Montreal":
                         path_coords.append([x, y])
                     
                     #update df id color path
-                    st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id, 'color': color, 'path': path_coords, 'length': length+'m'}, ignore_index=True)
+                    st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id, 'color': color, 'path': path_coords, 'length': str(round(length,2))+'m'}, ignore_index=True)
                     st.session_state.path_layer = pdk.Layer(
                         "PathLayer",
                         data=st.session_state.pipe_df,
