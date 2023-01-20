@@ -180,17 +180,20 @@ if page == "Montreal":
     with tab1:
 
         with st.form(key='tab1'):
-            col1, col2, col3, col4, col5 = st.columns(5)
+            col1, col2, col3 = st.columns(3)
             with col1:
                 lat = st.number_input('Latitude', min_value=0.0, max_value=90.0, value=45.532560)
             with col2:
                 lon = st.number_input('Longitude', min_value=-180.0, max_value=180.0, value=-73.615480)
             with col3:
                 node_id = st.text_input('Node ID', value='NO' + str(st.session_state.node_id_count))
+            
+            col4, col5 = st.columns(2)
             with col4:
+                node_type = st.selectbox('Node type', ['Home Portal', 'Comunity Portal', 'Junction']) 
+            with col5: 
                 color = st.color_picker('Colour', value='#5E29FF')
                 color = hex_to_rgb(color)
-            
 
             if st.form_submit_button('Add node'):
                 
