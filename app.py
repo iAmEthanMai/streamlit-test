@@ -72,7 +72,7 @@ data1 = [['Alice', [-73.597650,45.522920], [94, 41, 255],'None'],['Ethan',[-73.6
 
 
 if 'pipe_df' not in st.session_state:
-    st.session_state.pipe_df = pd.DataFrame([], columns=['id', 'color', 'path', 'length'])
+    st.session_state.pipe_df = pd.DataFrame([], columns=['id', 'color', 'path', 'length', 'bidirectional'])
     #st.session_state.pipe_df['color'] = st.session_state.pipe_df['color'].apply(hex_to_rgb)
 
 
@@ -82,7 +82,7 @@ if 'total_length' not in st.session_state:
 if 'node_id_count' not in st.session_state:
     st.session_state.node_id_count = 0
 if 'node_df' not in st.session_state:
-    st.session_state.node_df = pd.DataFrame(data1, columns=['id','position','color','length'])
+    st.session_state.node_df = pd.DataFrame(data1, columns=['id','position','color','length', 'type'])
 
 if 'scatter_layer' not in st.session_state:
     st.session_state.scatter_layer = pdk.Layer(
@@ -204,7 +204,7 @@ if page == "Montreal":
 
                     st.session_state.node_id_count += 1
                     st.session_state.total_cost += NODE_COST
-                    st.session_state.node_df = st.session_state.node_df.append({'id': node_id, 'position': [lon, lat], 'color': color, 'length': 'None'}, ignore_index=True)
+                    st.session_state.node_df = st.session_state.node_df.append({'id': node_id, 'position': [lon, lat], 'color': color, 'length': 'None', 'type': node_type}, ignore_index=True)
                     st.session_state.scatter_layer = pdk.Layer(
                         "ScatterplotLayer",
                         data=st.session_state.node_df,
@@ -278,7 +278,7 @@ if page == "Montreal":
                         path_coords.append([x, y])
                     
                     #update df id color path
-                    st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id, 'color': color, 'path': path_coords, 'length': str(round(length,2))+'m'}, ignore_index=True)
+                    st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id, 'color': color, 'path': path_coords, 'length': str(round(length,2))+'m', 'bidirectional': bidirectional}, ignore_index=True)
                     st.session_state.path_layer = pdk.Layer(
                         "PathLayer",
                         data=st.session_state.pipe_df,
