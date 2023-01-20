@@ -61,7 +61,7 @@ def hex_to_rgb(h):
 
 
 
-data1 = [['Alice', [-73.597650,45.522920], [94, 41, 255],'None','Home Portal'],['Ethan',[-73.615480,45.522560], [94, 41, 255],'None','Home Portal']]
+data1 = [['Alice', [-73.597650,45.522920], [94, 41, 255],'None'],['Ethan',[-73.615480,45.522560], [94, 41, 255],'None']]
 
 
 
@@ -82,7 +82,7 @@ if 'total_length' not in st.session_state:
 if 'node_id_count' not in st.session_state:
     st.session_state.node_id_count = 0
 if 'node_df' not in st.session_state:
-    st.session_state.node_df = pd.DataFrame(data1, columns=['id','position','color','length', 'type'])
+    st.session_state.node_df = pd.DataFrame(data1, columns=['id','position','color','length'])
 
 if 'scatter_layer' not in st.session_state:
     st.session_state.scatter_layer = pdk.Layer(
@@ -204,7 +204,7 @@ if page == "Montreal":
 
                     st.session_state.node_id_count += 1
                     st.session_state.total_cost += NODE_COST
-                    st.session_state.node_df = st.session_state.node_df.append({'id': node_id, 'position': [lon, lat], 'color': color, 'length': 'None', 'type': node_type}, ignore_index=True)
+                    st.session_state.node_df = st.session_state.node_df.append({'id': node_id, 'position': [lon, lat], 'color': color, 'length': 'None'}, ignore_index=True)
                     st.session_state.scatter_layer = pdk.Layer(
                         "ScatterplotLayer",
                         data=st.session_state.node_df,
