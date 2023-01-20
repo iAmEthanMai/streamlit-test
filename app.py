@@ -237,7 +237,7 @@ if page == "Montreal":
                 color = hex_to_rgb(color)
             
             
-            
+            bidirectional = st.checkbox('Bidirectional')
             
             with st.expander('Pipe features'):
 
