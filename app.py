@@ -429,7 +429,7 @@ elif page == "Settings":
         with col3:
             community_portal_color = st.color_picker('Color', value='#00FFAA', key='community_portal_color')
 
-
+        st.markdown('----')
         if st.form_submit_button('Save'):
             st.write('Settings saved')
     
