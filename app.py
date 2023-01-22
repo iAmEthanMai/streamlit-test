@@ -25,7 +25,7 @@ st.set_page_config(
 
 #make tab menu
 st.sidebar.title('Pipedream Networks')
-page = st.sidebar.radio("", ["Manual", "Automatic", "Settings"])
+page = st.sidebar.radio("", ["Manual", "Automatic", "Settings ⚙️"])
 
 
 
