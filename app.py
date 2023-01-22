@@ -525,7 +525,7 @@ elif page == "Settings":
             junction_cost = st.number_input('Cost', value=st.session_state.junction_cost, step=1000, min_value=0, max_value=1000000, key='junction_cost_input')
         with col2:
             junction_id_prefix = st.text_input('ID prefix', value=st.session_state.junction_id_prefix, key='junction_id_prefix_input')
-        with col3:
+        with col4:
             junction_colour = st.color_picker('Colour', value=st.session_state.junction_colour, key='junction_color_input')
 
 
