@@ -450,11 +450,11 @@ elif page == "Settings":
 
         col1, col2, col3 = st.columns(3)
         with col1:
-            bipipe_cost = st.number_input('Pipe cost', value=PIPE_COST, step=1000, min_value=0, max_value=1000000, key='pipe_cost')
+            bipipe_cost = st.number_input('Pipe cost', value=PIPE_COST, step=1000, min_value=0, max_value=1000000, key='bipipe_cost')
         with col2:
-            bipipe_width = st.number_input('Pipe width', value=50, step=10, min_value=0, max_value=1000, key='pipe_width')
+            bipipe_width = st.number_input('Pipe width', value=50, step=10, min_value=0, max_value=1000, key='bipipe_width')
         with col3:
-            bipipe_color = st.color_picker('Pipe colour', value='#00FFAA', key='pipe_color')
+            bipipe_color = st.color_picker('Pipe colour', value='#00FFAA', key='bipipe_color')
 
         if st.form_submit_button('Save'):
             st.write('Settings saved')
