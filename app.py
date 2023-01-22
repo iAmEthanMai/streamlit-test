@@ -130,7 +130,7 @@ if 'home_portal_cost' not in st.session_state:
     st.session_state.home_portal_cost = NODE_COST
 
 if 'home_portal_radius' not in st.session_state:
-    st.session_state.home_portal_radius = NODE_RADUS
+    st.session_state.home_portal_radius = NODE_RADIUS
 
 if 'home_portal_id_prefix' not in st.session_state:
     st.session_state.home_portal_id_prefix = 'HP'
