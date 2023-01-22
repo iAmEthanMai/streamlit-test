@@ -573,7 +573,8 @@ elif page == "Settings":
         st.subheader('Pipe settings')
         #pipe settings section
         col1, col2, col3, col4 = st.columns(4)
-        pipe_width = st.number_input('Width', value=50, step=10, min_value=0, max_value=1000, key='pipe_width')
+        with col1:
+            pipe_width = st.number_input('Width', value=50, step=10, min_value=0, max_value=1000, key='pipe_width')
         st.markdown('**Unidirectional pipe settings**')
         col1, col2, col3, col4 = st.columns(4)
         with col1:
