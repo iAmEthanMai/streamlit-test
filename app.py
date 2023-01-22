@@ -256,6 +256,7 @@ if page == "Manual":
     with tab1:
 
         with st.form(key='tab1'):
+            st.write(nde_type)
             col1, col2, col3 = st.columns(3)
             with col1:
                 lat = st.number_input('Latitude', min_value=0.0, max_value=90.0, value=45.532560)
