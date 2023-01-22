@@ -406,7 +406,7 @@ elif page == "Settings":
         with col2:
             junction_radius = st.number_input('Radius', value=200, step=10, min_value=0, max_value=1000, key='junction_radius')
         with col3:
-            junction_color = st.color_picker('Color', value='#00FFAA', key='junction_color')
+            junction_color = st.color_picker('Colour', value='#00FFAA', key='junction_color')
 
 
         st.markdown('**Home portal settings**')
@@ -416,7 +416,7 @@ elif page == "Settings":
         with col2:
             home_portal_radius = st.number_input('Radius', value=200, step=10, min_value=0, max_value=1000, key='home_portal_radius')
         with col3:
-            home_portal_color = st.color_picker('Color', value='#00FFAA', key='home_portal_color')
+            home_portal_color = st.color_picker('Colour', value='#00FFAA', key='home_portal_color')
 
 
         st.markdown('**Community portal settings**')
@@ -426,7 +426,7 @@ elif page == "Settings":
         with col2:
             community_portal_radius = st.number_input('Radius', value=200, step=10, min_value=0, max_value=1000, key='community_portal_radius')
         with col3:
-            community_portal_color = st.color_picker('Color', value='#00FFAA', key='community_portal_color')
+            community_portal_color = st.color_picker('Colour', value='#00FFAA', key='community_portal_color')
 
         
         if st.form_submit_button('Save'):
@@ -435,7 +435,27 @@ elif page == "Settings":
     with st.form(key='pipe_settings'):
         st.subheader('Pipe settings')
         #pipe settings section
-        pipe_cost = st.number_input('Pipe cost', value=PIPE_COST, step=1000, min_value=0, max_value=1000000, key='pipe_cost')
+        st.markdown('**Unidirectional pipe settings**')
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            pipe_cost = st.number_input('Pipe cost', value=PIPE_COST, step=1000, min_value=0, max_value=1000000, key='pipe_cost')
+        with col2:
+            pipe_width = st.number_input('Pipe width', value=50, step=10, min_value=0, max_value=1000, key='pipe_width')
+        with col3:
+            pipe_color = st.color_picker('Pipe colour', value='#00FFAA', key='pipe_color')
+
+        
+
+        st.markdown('**Bidirectional pipe settings**')
+
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            pipe_cost = st.number_input('Pipe cost', value=PIPE_COST, step=1000, min_value=0, max_value=1000000, key='pipe_cost')
+        with col2:
+            pipe_width = st.number_input('Pipe width', value=50, step=10, min_value=0, max_value=1000, key='pipe_width')
+        with col3:
+            pipe_color = st.color_picker('Pipe colour', value='#00FFAA', key='pipe_color')
+            
         if st.form_submit_button('Save'):
             st.write('Settings saved')
 
