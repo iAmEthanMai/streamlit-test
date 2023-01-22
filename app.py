@@ -404,9 +404,9 @@ elif page == "Settings":
         with col1:
             junction_cost = st.number_input('Junction cost', value=NODE_COST, step=1000, min_value=0, max_value=1000000, key='junction_cost')
         with col2:
-            junction_color = st.color_picker('Junction color', value='#00FFAA', key='junction_color')
-        with col3:
             junction_radius = st.number_input('Junction radius', value=200, step=10, min_value=0, max_value=1000, key='junction_radius')
+        with col3:
+            junction_color = st.color_picker('Junction color', value='#00FFAA', key='junction_color')
 
         col3, col4 = st.columns(2)
         with col3:
