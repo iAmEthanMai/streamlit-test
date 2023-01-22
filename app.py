@@ -469,3 +469,6 @@ elif page == "Settings":
         if st.form_submit_button('Save'):
             st.write('Settings saved')
 
+    st.download_button('Download settings', st.session_state.node_df.to_csv(), 'settings.csv', 'text/csv')
+    
+
