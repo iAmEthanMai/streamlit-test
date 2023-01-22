@@ -470,10 +470,10 @@ elif page == "Settings":
             st.write('Settings saved')
 
     
-        st.markdown('**Export settings**')
-        st.button('Download settings', key='download_settings')
+    st.markdown('**Export settings**')
+    st.button('Download settings', key='download_settings')
 
-        st.markdown('**Import settings**')
-        uploaded_file = st.file_uploader("Choose a file")
+    st.markdown('**Import settings**')
+    uploaded_file = st.file_uploader("Choose a file")
     
 
