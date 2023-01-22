@@ -409,6 +409,7 @@ elif page == "Settings":
         with col3:
             junction_color = st.color_picker('Color', value='#00FFAA', key='junction_color')
 
+        st.markdown('----')
         st.write('Home portal')
         col1, col2, col3 = st.columns(3)
         with col1:
