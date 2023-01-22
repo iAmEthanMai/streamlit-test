@@ -399,7 +399,7 @@ elif page == "Settings":
     with st.form(key='node_settings'):
         st.markdown('#### Node settings')
         #node settings section
-
+        st.markdown('----')
         st.write('Junction')
         col1, col2, col3 = st.columns(3)
         with col1:
@@ -418,6 +418,7 @@ elif page == "Settings":
             home_portal_radius = st.number_input('Radius', value=200, step=10, min_value=0, max_value=1000, key='home_portal_radius')
         with col3:
             home_portal_color = st.color_picker('Color', value='#00FFAA', key='home_portal_color')
+        st.markdown('----')
 
         st.write('Community portal')
         col1, col2, col3 = st.columns(3)
