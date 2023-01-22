@@ -400,15 +400,23 @@ elif page == "Settings":
         st.write('Node settings')
         #node settings section
 
+        col1, col2 = st.columns(2)
+        with col1:
+            junction_cost = st.number_input('Junction cost', value=NODE_COST, step=1000, min_value=0, max_value=1000000, key='junction_cost')
+        with col2:
+            junction_color = st.color_picker('Junction color', value='#00FFAA', key='junction_color')
         
-        junction_cost = st.number_input('Junction cost', value=NODE_COST, step=1000, min_value=0, max_value=1000000, key='junction_cost')
-        junction_color = st.color_picker('Junction color', value='#00FFAA', key='junction_color')
+        col3, col4 = st.columns(2)
+        with col3:
+            home_portal_cost = st.number_input('Homeportal cost', value=NODE_COST, step=1000, min_value=0, max_value=1000000, key='home_portal_cost')
+        with col4:
+            home_portal_color = st.color_picker('Homeportal color', value='#00FFAA', key='home_portal_color')
 
-        home_portal_cost = st.number_input('Homeportal cost', value=NODE_COST, step=1000, min_value=0, max_value=1000000, key='home_portal_cost')
-        home_portal_color = st.color_picker('Homeportal color', value='#00FFAA', key='home_portal_color')
-
-        community_portal_cost = st.number_input('Community portal cost', value=NODE_COST, step=1000, min_value=0, max_value=1000000, key='community_portal_cost')
-        community_portal_color = st.color_picker('Community portal color', value='#00FFAA', key='community_portal_color')
+        col5, col6 = st.columns(2)
+        with col5:
+            community_portal_cost = st.number_input('Community portal cost', value=NODE_COST, step=1000, min_value=0, max_value=1000000, key='community_portal_cost')
+        with col6:
+            community_portal_color = st.color_picker('Community portal color', value='#00FFAA', key='community_portal_color')
 
         node_size = st.number_input('Node size', value=200, step=10, min_value=0, max_value=1000, key='node_size')
 
