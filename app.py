@@ -471,7 +471,7 @@ elif page == "Settings":
 
     
         st.markdown('**Export settings**')
-        st.download_button('Download settings', st.session_state.node_df.to_csv(), 'settings.csv', 'text/csv')
+        st.button('Download settings', key='download_settings')
 
         st.markdown('**Import settings**')
         uploaded_file = st.file_uploader("Choose a file")
