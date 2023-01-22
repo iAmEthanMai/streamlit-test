@@ -554,7 +554,6 @@ elif page == "Settings":
         
         if st.form_submit_button('Save'):
             st.session_state.junction_cost = junction_cost
-            st.session_state.junction_radius = junction_radius
             st.session_state.junction_id_prefix = junction_id_prefix
             st.session_state.junction_colour = junction_colour
 
