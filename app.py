@@ -25,7 +25,8 @@ st.set_page_config(
 
 #make tab menu
 st.sidebar.title('Pipedream Networks')
-page = st.sidebar.radio("", ["Montreal", "Austin"])
+page = st.sidebar.radio("", ["Manual", "Automatic", "Settings"])
+
 
 
 
@@ -390,5 +391,10 @@ elif page == "Austin":
     r = pdk.Deck(layers=[], initial_view_state=view_state_austin, tooltip={})
     
     st.pydeck_chart(r)
+
+
+elif page == "Settings":
+    st.title('Settings')
+    st.write('This is the Settings page')
     
 
