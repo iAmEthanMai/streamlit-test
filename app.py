@@ -35,6 +35,11 @@ import networkx as nx
 
 
 
+
+NODE_COST = 1000
+PIPE_COST = 10 #$/m
+
+
 data1 = [['Alice', [-73.597650,45.522920], [94, 41, 255],'None'],['Ethan',[-73.615480,45.522560], [94, 41, 255],'None']]
 
 
@@ -156,11 +161,6 @@ page = st.sidebar.radio("", ["Manual", "Automatic", "Settings"])
 
 
 
-
-
-
-NODE_COST = 1000
-PIPE_COST = 10 #$/m
 
 
 
