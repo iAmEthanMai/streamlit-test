@@ -268,7 +268,8 @@ if page == "Manual":
             with col4:
                 node_type = st.selectbox('Node type', ['Home Portal', 'Comunity Portal', 'Junction']) 
             with col5: 
-                color = st.color_picker('Colour', value='#5E29FF')
+                #color = st.color_picker('Colour', value='#5E29FF')
+                color = st.session_state.junction_colour
                 color = hex_to_rgb(color)
 
             if st.form_submit_button('Add node'):
