@@ -544,9 +544,8 @@ elif page == "Settings":
         col1, col2, col3, col4 = st.columns(4)
         with col1:
             community_portal_cost = st.number_input('Cost', value=NODE_COST, step=1000, min_value=0, max_value=1000000, key='community_portal_cost')
+        
         with col2:
-            community_portal_radius = st.number_input('Radius', value=200, step=10, min_value=0, max_value=1000, key='community_portal_radius')
-        with col3:
             community_portal_id_prefix = st.text_input('ID prefix', value='CP', key='community_portal_id_prefix')
         with col4:
             community_portal_colour = st.color_picker('Colour', value='#00FFAA', key='community_portal_colour')
