@@ -469,24 +469,5 @@ elif page == "Settings":
         if st.form_submit_button('Save'):
             st.write('Settings saved')
 
-    with st.form(key='map_settings'):
-        st.subheader('Export/import settings')
-
-
-        st.markdown('**Export settings**')
-        st.download_button('Download settings', st.session_state.node_df.to_csv(), 'settings.csv', 'text/csv')
-
-        st.markdown('**Import settings**')
-        uploaded_file = st.file_uploader("Choose a file")
-        if st.form_submit_button('Import'):
-            if uploaded_file is not None:
-                st.write('Settings imported')
-                #read file
-                #update settings
-                #save settings
-            else:
-                st.write('No file uploaded')
-    
-    
     
 
