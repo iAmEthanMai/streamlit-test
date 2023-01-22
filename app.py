@@ -412,22 +412,26 @@ elif page == "Settings":
 
 
         st.markdown('**Home portal settings**')
-        col1, col2, col3 = st.columns(3)
+        col1, col2, col3, col4 = st.columns(4)
         with col1:
             home_portal_cost = st.number_input('Cost', value=NODE_COST, step=1000, min_value=0, max_value=1000000, key='home_portal_cost')
         with col2:
             home_portal_radius = st.number_input('Radius', value=200, step=10, min_value=0, max_value=1000, key='home_portal_radius')
         with col3:
+            home_portal_id_prefix = st.text_input('ID prefix', value='HP', key='home_portal_id_prefix')
+        with col4:
             home_portal_color = st.color_picker('Colour', value='#00FFAA', key='home_portal_color')
 
 
         st.markdown('**Community portal settings**')
-        col1, col2, col3 = st.columns(3)
+        col1, col2, col3, col4 = st.columns(4)
         with col1:
             community_portal_cost = st.number_input('Cost', value=NODE_COST, step=1000, min_value=0, max_value=1000000, key='community_portal_cost')
         with col2:
             community_portal_radius = st.number_input('Radius', value=200, step=10, min_value=0, max_value=1000, key='community_portal_radius')
         with col3:
+            community_portal_id_prefix = st.text_input('ID prefix', value='CP', key='community_portal_id_prefix')
+        with col4:
             community_portal_color = st.color_picker('Colour', value='#00FFAA', key='community_portal_color')
 
         
@@ -438,24 +442,28 @@ elif page == "Settings":
         st.subheader('Pipe settings')
         #pipe settings section
         st.markdown('**Unidirectional pipe settings**')
-        col1, col2, col3 = st.columns(3)
+        col1, col2, col3, col4 = st.columns(4)
         with col1:
             pipe_cost = st.number_input('Cost ($/m)', value=PIPE_COST, step=1000, min_value=0, max_value=1000000, key='pipe_cost')
         with col2:
             pipe_width = st.number_input('Width', value=50, step=10, min_value=0, max_value=1000, key='pipe_width')
         with col3:
+            pipe_id_prefix = st.text_input('ID prefix', value='PI', key='pipe_id_prefix')
+        with col4:
             pipe_color = st.color_picker('Colour', value='#00FFAA', key='pipe_color')
 
         
 
         st.markdown('**Bidirectional pipe settings**')
 
-        col1, col2, col3 = st.columns(3)
+        col1, col2, col3, col4 = st.columns(4)
         with col1:
             bipipe_cost = st.number_input('Cost ($/m)', value=PIPE_COST, step=1000, min_value=0, max_value=1000000, key='bipipe_cost')
         with col2:
             bipipe_width = st.number_input('Width', value=50, step=10, min_value=0, max_value=1000, key='bipipe_width')
         with col3:
+            bipipe_id_prefix = st.text_input('ID prefix', value='PI', key='bipipe_id_prefix')
+        with col4:
             bipipe_color = st.color_picker('Colour', value='#00FFAA', key='bipipe_color')
 
         if st.form_submit_button('Save'):
