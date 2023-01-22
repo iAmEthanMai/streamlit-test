@@ -513,7 +513,12 @@ elif page == "Settings":
     with st.form(key='node_settings'):
         st.subheader('Node settings')
         #node settings section
-        node_radius = st.number_input('Radius', value=NODE_RADIUS, step=10, min_value=0, max_value=1000, key='junction_radius_input') 
+        col1, col2, col3, col4 = st.columns(4)
+        with col1: 
+            node_radius = st.number_input('Radius', value=NODE_RADIUS, step=10, min_value=0, max_value=1000, key='junction_radius_input') 
+        
+
+        
         st.markdown('**Junction settings**')
         col1, col2, col3, col4 = st.columns(4)
         with col1:
@@ -528,9 +533,8 @@ elif page == "Settings":
         col1, col2, col3, col4 = st.columns(4)
         with col1:
             home_portal_cost = st.number_input('Cost', value=NODE_COST, step=1000, min_value=0, max_value=1000000, key='home_portal_cost_input')
+        
         with col2:
-            home_portal_radius = st.number_input('Radius', value=200, step=10, min_value=0, max_value=1000, key='home_portal_radius_input')
-        with col3:
             home_portal_id_prefix = st.text_input('ID prefix', value='HP', key='home_portal_id_prefix_input')
         with col4:
             home_portal_colour = st.color_picker('Colour', value='#00FFAA', key='home_portal_colour_input')
