@@ -288,12 +288,9 @@ if page == "Manual":
             
             if st.session_state.node_type == 'Junction':
                 st.session_state.node_colour = st.session_state.junction_colour
-                st.session_state.node_radius = st.session_state.junction_radius
-                st.session_state.node_cost = st.session_state.junction_cost
                 st.session_state.node_id_prefix = st.session_state.junction_id_prefix
             elif st.session_state.node_type == 'Home Portal':
                 st.session_state.node_colour = st.session_state.home_portal_colour
-                st.session_state.node_radius = st.session_state.home_portal_radius
                 st.session_state.node_cost = st.session_state.home_portal_cost
                 st.session_state.node_id_prefix = st.session_state.home_portal_id_prefix
             
@@ -516,16 +513,14 @@ elif page == "Settings":
     with st.form(key='node_settings'):
         st.subheader('Node settings')
         #node settings section
-
+        node_radius = st.number_input('Radius', value=NODE_RADUS, step=10, min_value=0, max_value=1000, key='junction_radius_input') 
         st.markdown('**Junction settings**')
         col1, col2, col3, col4 = st.columns(4)
         with col1:
             junction_cost = st.number_input('Cost', value=st.session_state.junction_cost, step=1000, min_value=0, max_value=1000000, key='junction_cost_input')
         with col2:
-            junction_radius = st.number_input('Radius', value=int(st.session_state.junction_radius), step=10, min_value=0, max_value=1000, key='junction_radius_input')
-        with col3:
             junction_id_prefix = st.text_input('ID prefix', value=st.session_state.junction_id_prefix, key='junction_id_prefix_input')
-        with col4:
+        with col3:
             junction_colour = st.color_picker('Colour', value=st.session_state.junction_colour, key='junction_color_input')
 
 
