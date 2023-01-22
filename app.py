@@ -13,19 +13,6 @@ import pickle
 import networkx as nx
 
 
-#set page config
-st.set_page_config(
-
-    page_title="Pipedream Network Editor",
-    #page_icon="app/assets/icon.svg",
-    #layout="wide",
-    initial_sidebar_state="expanded",
-)
-
-
-#make tab menu
-st.sidebar.title('Pipedream Networks')
-page = st.sidebar.radio("", ["Manual", "Automatic", "Settings"])
 
 
 
@@ -33,24 +20,6 @@ page = st.sidebar.radio("", ["Manual", "Automatic", "Settings"])
 
 
 
-NODE_COST = 1000
-PIPE_COST = 10 #$/m
-
-
-
-@st.cache(allow_output_mutation=True)
-def load_graph():
-    return ox.load_graphml('simplified.graphml') 
-    
-
-
-def display_elevation():
-    st.write('Elevation profile')
-    #array that looks like a mountain
-    elevations = [10,10,10.5,10.5,10.5,10.5,10.5,11,11,11,11,11.5,11.5,11.5,11.5,11.5,11,11,11,11,11,11.5,11.5,11,11,11,11,11,11.5,11.5,11,11,11,11,11,10.5,10,9.5,9,9,9,9,9,9,9,9,9,9.5,9.5,9.5,9.5,9.5,9.5,9.5,9.5]
-
-
-    st.area_chart(elevations)
 
 
 
@@ -58,9 +27,11 @@ def display_elevation():
 
 
 
-def hex_to_rgb(h):
-    h = h.lstrip('#')
-    return tuple(int(h[i:i+2], 16) for i in (0, 2, 4))
+
+
+
+
+
 
 
 
@@ -128,6 +99,90 @@ if 'total_cost' not in st.session_state:
     st.session_state.total_cost = len(st.session_state.node_df) * NODE_COST
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#set page config
+st.set_page_config(
+
+    page_title="Pipedream Network Editor",
+    #page_icon="app/assets/icon.svg",
+    #layout="wide",
+    initial_sidebar_state="expanded",
+)
+
+
+#make tab menu
+st.sidebar.title('Pipedream Networks')
+page = st.sidebar.radio("", ["Manual", "Automatic", "Settings"])
+
+
+
+
+
+
+
+NODE_COST = 1000
+PIPE_COST = 10 #$/m
+
+
+
+@st.cache(allow_output_mutation=True)
+def load_graph():
+    return ox.load_graphml('simplified.graphml') 
+    
+
+
+def display_elevation():
+    st.write('Elevation profile')
+    #array that looks like a mountain
+    elevations = [10,10,10.5,10.5,10.5,10.5,10.5,11,11,11,11,11.5,11.5,11.5,11.5,11.5,11,11,11,11,11,11.5,11.5,11,11,11,11,11,11.5,11.5,11,11,11,11,11,10.5,10,9.5,9,9,9,9,9,9,9,9,9,9.5,9.5,9.5,9.5,9.5,9.5,9.5,9.5]
+
+
+    st.area_chart(elevations)
+
+
+
+def hex_to_rgb(h):
+    h = h.lstrip('#')
+    return tuple(int(h[i:i+2], 16) for i in (0, 2, 4))
 
 
 
