@@ -397,6 +397,7 @@ elif page == "Automatic":
 elif page == "Settings":
     st.title('Settings')
     with st.form(key='node_settings'):
+        st.subheader('Node settings')
         #node settings section
         
         node_cost = st.number_input('Node cost', value=NODE_COST, step=1000, min_value=0, max_value=1000000, key='node_cost')
@@ -404,6 +405,7 @@ elif page == "Settings":
             st.write('Settings saved')
     
     with st.form(key='pipe_settings'):
+        st.subheader('Pipe settings')
         #pipe settings section
         pipe_cost = st.number_input('Pipe cost', value=PIPE_COST, step=1000, min_value=0, max_value=1000000, key='pipe_cost')
         if st.form_submit_button('Save'):
