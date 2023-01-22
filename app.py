@@ -305,7 +305,7 @@ if page == "Manual":
             
             col4, col5 = st.columns(2)
             with col4:
-                node_type = st.selectbox('Node type', ['Home Portal', 'Comunity Portal', 'Junction']) 
+                node_type = st.selectbox('Node type', ['Home Portal', 'Comunity Portal', 'Junction'], on_change=st.experimental_rerun()) 
                 st.session_state.node_type = node_type
 
             with col5: 
@@ -576,11 +576,11 @@ elif page == "Settings":
         #age = st.slider('Pipe width (px)', 50, 200, 75)
         col1, col2, col3, col4 = st.columns(4)
         with col1:
-            pipe_width = st.number_input('Width', value=50, step=10, min_value=0, max_value=1000, key='pipe_width')
+            pipe_width = st.number_input('Width', value=50, step=10, min_value=0, max_value=200, key='pipe_width')
         st.markdown('**Unidirectional pipe settings**')
         col1, col2, col3, col4 = st.columns(4)
         with col1:
-            pipe_cost = st.number_input('Cost ($/m)', value=PIPE_COST, step=1000, min_value=0, max_value=1000000, key='pipe_cost')
+            pipe_cost = st.number_input('Cost ($/m)', value=PIPE_COST, step=5, min_value=0, max_value=1000000, key='pipe_cost')
 
         with col2:
             pipe_id_prefix = st.text_input('ID prefix', value='PI', key='pipe_id_prefix')
@@ -593,14 +593,14 @@ elif page == "Settings":
 
         col1, col2, col3, col4 = st.columns(4)
         with col1:
-            bipipe_cost = st.number_input('Cost ($/m)', value=PIPE_COST, step=1000, min_value=0, max_value=1000000, key='bipipe_cost')
+            bipipe_cost = st.number_input('Cost ($/m)', value=PIPE_COST, step=5, min_value=0, max_value=1000000, key='bipipe_cost')
         with col2:
             bipipe_id_prefix = st.text_input('ID prefix', value='PI', key='bipipe_id_prefix')
         with col4:
             bipipe_colour = st.color_picker('Colour', value='#00FFAA', key='bipipe_colour')
 
         if st.form_submit_button('Save'):
-            st.write('Settings saved')
+            st.success('Pipe settings saved')
 
     
 
