@@ -27,6 +27,8 @@ st.set_page_config(
 st.sidebar.title('Pipedream Networks')
 page = st.sidebar.radio("", ["Manual", "Automatic", "Settings"])
 
+st.sidebar.button('Settings')
+
 
 
 
