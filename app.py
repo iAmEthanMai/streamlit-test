@@ -591,7 +591,7 @@ elif page == "Settings":
         col1, col2, col3, col4 = st.columns(4)
         with col1:
             bipipe_cost = st.number_input('Cost ($/m)', value=PIPE_COST, step=1000, min_value=0, max_value=1000000, key='bipipe_cost')
-       with col2:
+        with col2:
             bipipe_id_prefix = st.text_input('ID prefix', value='PI', key='bipipe_id_prefix')
         with col4:
             bipipe_colour = st.color_picker('Colour', value='#00FFAA', key='bipipe_colour')
