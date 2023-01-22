@@ -262,7 +262,7 @@ if page == "Manual":
             with col2:
                 lon = st.number_input('Longitude', min_value=-180.0, max_value=180.0, value=-73.615480)
             with col3:
-                node_id = st.text_input('Node ID', value='NO' + str(st.session_state.node_id_count))
+                node_id = st.text_input('Node ID', value=st.session_state.junction_id_prefix + str(st.session_state.node_id_count))
             
             col4, col5 = st.columns(2)
             with col4:
