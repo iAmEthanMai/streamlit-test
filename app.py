@@ -396,6 +396,10 @@ elif page == "Automatic":
 
 elif page == "Settings":
     st.title('Settings')
-    st.write('This is the Settings page')
+    with st.form(key='settings'):
+        st.write('Settings')
+        st.write('Change settings here')
+        if st.form_submit_button('Save'):
+            st.write('Settings saved')
     
 
