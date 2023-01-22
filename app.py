@@ -396,29 +396,16 @@ elif page == "Automatic":
 
 elif page == "Settings":
     st.title('Settings')
-    with st.form(key='settings'):
+    with st.form(key='node_settings'):
         #node settings section
-        st.header('Node settings')
-        st.write('Node cost: $')
-        node_cost = st.number_input('Node cost', value=NODE_COST, step=1000)
-        st.write('Node color: ')
-        node_color = st.color_picker('Node color', value='#FF0000')
-        st.write('Node radius: ')
-        node_radius = st.number_input('Node radius', value=200, step=100)
-
-        #pipe settings section
-        st.header('Pipe settings')
-        st.write('Pipe cost: $')
-        pipe_cost = st.number_input('Pipe cost', value=PIPE_COST, step=1000)
-        st.write('Pipe color: ')
-        pipe_color = st.color_picker('Pipe color', value='#0000FF')
-        st.write('Pipe width: ')
-        pipe_width = st.number_input('Pipe width', value=50, step=100)
         
-
-
-       
+        node_cost = st.number_input('Node cost', value=NODE_COST, step=1000, min_value=0, max_value=1000000, key='node_cost')
         if st.form_submit_button('Save'):
             st.write('Settings saved')
     
+    with st.form(key='pipe_settings'):
+        #pipe settings section
+        pipe_cost = st.number_input('Pipe cost', value=PIPE_COST, step=1000, min_value=0, max_value=1000000, key='pipe_cost')
+        if st.form_submit_button('Save'):
+            st.write('Settings saved')
 
