@@ -400,12 +400,14 @@ elif page == "Settings":
         st.write('Node settings')
         #node settings section
 
-        col1, col2 = st.columns(2)
+        col1, col2, col3 = st.columns(3)
         with col1:
             junction_cost = st.number_input('Junction cost', value=NODE_COST, step=1000, min_value=0, max_value=1000000, key='junction_cost')
         with col2:
             junction_color = st.color_picker('Junction color', value='#00FFAA', key='junction_color')
-        
+        with col3:
+            junction_radius = st.number_input('Junction radius', value=200, step=10, min_value=0, max_value=1000, key='junction_radius')
+
         col3, col4 = st.columns(2)
         with col3:
             home_portal_cost = st.number_input('Homeportal cost', value=NODE_COST, step=1000, min_value=0, max_value=1000000, key='home_portal_cost')
