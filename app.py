@@ -477,23 +477,23 @@ elif page == "Settings":
         with col1:
             junction_cost = st.number_input('Cost', value=st.session_state.junction_cost, step=1000, min_value=0, max_value=1000000, key='junction_cost_input')
         with col2:
-            junction_radius = st.number_input('Radius', value=int(st.session_state.junction_radius), step=10, min_value=0, max_value=1000, key='junction_radius')
+            junction_radius = st.number_input('Radius', value=int(st.session_state.junction_radius), step=10, min_value=0, max_value=1000, key='junction_radius_input')
         with col3:
-            junction_id_prefix = st.text_input('ID prefix', value=st.session_state.junction_id_prefix, key='junction_id_prefix')
+            junction_id_prefix = st.text_input('ID prefix', value=st.session_state.junction_id_prefix, key='junction_id_prefix_input')
         with col4:
-            junction_colour = st.color_picker('Colour', value=st.session_state.junction_colour, key='junction_color')
+            junction_colour = st.color_picker('Colour', value=st.session_state.junction_colour, key='junction_color_input')
 
 
         st.markdown('**Home portal settings**')
         col1, col2, col3, col4 = st.columns(4)
         with col1:
-            home_portal_cost = st.number_input('Cost', value=NODE_COST, step=1000, min_value=0, max_value=1000000, key='home_portal_cost')
+            home_portal_cost = st.number_input('Cost', value=NODE_COST, step=1000, min_value=0, max_value=1000000, key='home_portal_cost_input')
         with col2:
-            home_portal_radius = st.number_input('Radius', value=200, step=10, min_value=0, max_value=1000, key='home_portal_radius')
+            home_portal_radius = st.number_input('Radius', value=200, step=10, min_value=0, max_value=1000, key='home_portal_radius_input')
         with col3:
-            home_portal_id_prefix = st.text_input('ID prefix', value='HP', key='home_portal_id_prefix')
+            home_portal_id_prefix = st.text_input('ID prefix', value='HP', key='home_portal_id_prefix_input')
         with col4:
-            home_portal_colour = st.color_picker('Colour', value='#00FFAA', key='home_portal_colour')
+            home_portal_colour = st.color_picker('Colour', value='#00FFAA', key='home_portal_colour_input')
 
 
         st.markdown('**Community portal settings**')
