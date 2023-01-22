@@ -402,23 +402,22 @@ elif page == "Settings":
         st.write('Node cost: $')
         node_cost = st.number_input('Node cost', value=NODE_COST, step=1000)
         st.write('Node color: ')
-        node_color = st.color_picker('Node color', value=NODE_COLOR)
+        node_color = st.color_picker('Node color', value='#FF0000')
         st.write('Node radius: ')
-        node_radius = st.number_input('Node radius', value=NODE_RADIUS, step=100)
-       
+        node_radius = st.number_input('Node radius', value=200, step=100)
 
         #pipe settings section
         st.header('Pipe settings')
         st.write('Pipe cost: $')
         pipe_cost = st.number_input('Pipe cost', value=PIPE_COST, step=1000)
         st.write('Pipe color: ')
-        pipe_color = st.color_picker('Pipe color', value=PIPE_COLOR)
+        pipe_color = st.color_picker('Pipe color', value='#0000FF')
         st.write('Pipe width: ')
-        pipe_width = st.number_input('Pipe width', value=PIPE_WIDTH, step=100)
-        
+        pipe_width = st.number_input('Pipe width', value=50, step=100)
         
 
-        st.write('Change settings here')
+
+       
         if st.form_submit_button('Save'):
             st.write('Settings saved')
     
