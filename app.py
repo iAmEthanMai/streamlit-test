@@ -397,7 +397,27 @@ elif page == "Automatic":
 elif page == "Settings":
     st.title('Settings')
     with st.form(key='settings'):
-        st.write('Settings')
+        #node settings section
+        st.header('Node settings')
+        st.write('Node cost: $')
+        node_cost = st.number_input('Node cost', value=NODE_COST, step=1000)
+        st.write('Node color: ')
+        node_color = st.color_picker('Node color', value=NODE_COLOR)
+        st.write('Node radius: ')
+        node_radius = st.number_input('Node radius', value=NODE_RADIUS, step=100)
+       
+
+        #pipe settings section
+        st.header('Pipe settings')
+        st.write('Pipe cost: $')
+        pipe_cost = st.number_input('Pipe cost', value=PIPE_COST, step=1000)
+        st.write('Pipe color: ')
+        pipe_color = st.color_picker('Pipe color', value=PIPE_COLOR)
+        st.write('Pipe width: ')
+        pipe_width = st.number_input('Pipe width', value=PIPE_WIDTH, step=100)
+        
+        
+
         st.write('Change settings here')
         if st.form_submit_button('Save'):
             st.write('Settings saved')
