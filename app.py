@@ -408,19 +408,22 @@ elif page == "Settings":
         with col3:
             junction_color = st.color_picker('Junction color', value='#00FFAA', key='junction_color')
 
-        col3, col4 = st.columns(2)
-        with col3:
+        col1, col2, col3 = st.columns(3)
+        with col1:
             home_portal_cost = st.number_input('Homeportal cost', value=NODE_COST, step=1000, min_value=0, max_value=1000000, key='home_portal_cost')
-        with col4:
+        with col2:
+            home_portal_radius = st.number_input('Homeportal radius', value=200, step=10, min_value=0, max_value=1000, key='home_portal_radius')
+        with col3:
             home_portal_color = st.color_picker('Homeportal color', value='#00FFAA', key='home_portal_color')
 
-        col5, col6 = st.columns(2)
-        with col5:
+        col1, col2, col3 = st.columns(3)
+        with col1:
             community_portal_cost = st.number_input('Community portal cost', value=NODE_COST, step=1000, min_value=0, max_value=1000000, key='community_portal_cost')
-        with col6:
+        with col2:
+            community_portal_radius = st.number_input('Community portal radius', value=200, step=10, min_value=0, max_value=1000, key='community_portal_radius')
+        with col3:
             community_portal_color = st.color_picker('Community portal color', value='#00FFAA', key='community_portal_color')
 
-        node_size = st.number_input('Node size', value=200, step=10, min_value=0, max_value=1000, key='node_size')
 
         if st.form_submit_button('Save'):
             st.write('Settings saved')
