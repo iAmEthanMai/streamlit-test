@@ -37,7 +37,19 @@ import networkx as nx
 
 
 NODE_COST = 1000
+NODE_RADIUS = 200
+NODE_COLOUR = '#00FFAA'
+NODE_ID_PREFIX = 'NO'
+
+
+
+
 PIPE_COST = 10 #$/m
+PIPE_WIDTH = 50
+PIPE_COLUR = '#FF0000'
+PIPE_ID_PREFIX = 'PI'
+
+
 
 
 data1 = [['Alice', [-73.597650,45.522920], [94, 41, 255],'None'],['Ethan',[-73.615480,45.522560], [94, 41, 255],'None']]
@@ -104,13 +116,13 @@ if 'junction_cost' not in st.session_state:
     st.session_state.junction_cost = NODE_COST
 
 if 'junction_radius' not in st.session_state:
-    st.session_state.junction_radius = 200
+    st.session_state.junction_radius = NODE_RADIUS
 
 if 'junction_id_prefix' not in st.session_state:
     st.session_state.junction_id_prefix = 'JU'
 
 if 'junction_colour' not in st.session_state:
-    st.session_state.junction_colour = '#ff0000'
+    st.session_state.junction_colour = NODE_COLOUR
 
 
 
@@ -118,13 +130,16 @@ if 'home_portal_cost' not in st.session_state:
     st.session_state.home_portal_cost = NODE_COST
 
 if 'home_portal_radius' not in st.session_state:
-    st.session_state.home_portal_radius = 200
+    st.session_state.home_portal_radius = NODE_RADUS
 
 if 'home_portal_id_prefix' not in st.session_state:
     st.session_state.home_portal_id_prefix = 'HP'
 
 if 'home_portal_colour' not in st.session_state:
-    st.session_state.home_portal_colour = '#ff0000'
+    st.session_state.home_portal_colour = NODE_COLOUR
+
+
+
 
 
 
@@ -256,21 +271,49 @@ if page == "Manual":
     with tab1:
 
         with st.form(key='tab1'):
-            st.write(node_type)
+            if 'node_type' not in st.session_state:
+                st.session_state.node_type = 'Home Portal'
+            
+            if 'node_colour' not in st.session_state:
+                st.session_state.node_colour = NODE_COLOUR
+
+            if 'node_radius' not in st.session_state:
+                st.session_state.node_radius = NODE_RADIUS
+
+            if 'node_cost' not in st.session_state:
+                st.session_state.node_cost = NODE_COST
+
+            if 'node_id_prefix' not in st.session_state:
+                st.session_state.node_id_prefix = st.session_state.home_portal_id_prefix
+            
+            if st.session_state.node_type == 'Junction':
+                st.session_state.node_colour = st.session_state.junction_colour
+                st.session_state.node_radius = st.session_state.junction_radius
+                st.session_state.node_cost = st.session_state.junction_cost
+                st.session_state.node_id_prefix = st.session_state.junction_id_prefix
+            elif st.session_state.node_type == 'Home Portal':
+                st.session_state.node_colour = st.session_state.home_portal_colour
+                st.session_state.node_radius = st.session_state.home_portal_radius
+                st.session_state.node_cost = st.session_state.home_portal_cost
+                st.session_state.node_id_prefix = st.session_state.home_portal_id_prefix
+            
+            
             col1, col2, col3 = st.columns(3)
             with col1:
                 lat = st.number_input('Latitude', min_value=0.0, max_value=90.0, value=45.532560)
             with col2:
                 lon = st.number_input('Longitude', min_value=-180.0, max_value=180.0, value=-73.615480)
             with col3:
-                node_id = st.text_input('Node ID', value=st.session_state.junction_id_prefix + str(st.session_state.node_id_count))
+                node_id = st.text_input('Node ID', value=st.session_state.node_id_prefix + str(st.session_state.node_id_count))
             
             col4, col5 = st.columns(2)
             with col4:
                 node_type = st.selectbox('Node type', ['Home Portal', 'Comunity Portal', 'Junction']) 
+                st.session_state.node_type = node_type
+
             with col5: 
                 #color = st.color_picker('Colour', value='#5E29FF')
-                color = st.session_state.junction_colour
+                color = st.session_state.node_colour
                 color = hex_to_rgb(color)
 
             if st.form_submit_button('Add node'):
@@ -281,7 +324,7 @@ if page == "Manual":
                 else:
 
                     st.session_state.node_id_count += 1
-                    st.session_state.total_cost += NODE_COST
+                    st.session_state.total_cost += st.session_state.node_cost
                     st.session_state.node_df = st.session_state.node_df.append({'id': node_id, 'position': [lon, lat], 'color': color, 'length': 'None'}, ignore_index=True)
                     st.session_state.scatter_layer = pdk.Layer(
                         "ScatterplotLayer",
@@ -291,7 +334,7 @@ if page == "Manual":
                         auto_highlight=True,
                         get_position='position',
                         get_color='color',
-                        get_radius=200,
+                        get_radius=st.session_state.node_radius,
                     )
 
                     st.experimental_rerun()
