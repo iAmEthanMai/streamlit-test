@@ -400,12 +400,14 @@ elif page == "Settings":
         #node settings section
 
         st.markdown('**Junction settings**')
-        col1, col2, col3 = st.columns(3)
+        col1, col2, col3, col4 = st.columns(4)
         with col1:
             junction_cost = st.number_input('Cost', value=NODE_COST, step=1000, min_value=0, max_value=1000000, key='junction_cost')
         with col2:
             junction_radius = st.number_input('Radius', value=200, step=10, min_value=0, max_value=1000, key='junction_radius')
         with col3:
+            junction_id_prefix = st.text_input('ID prefix', value='JU', key='junction_id_prefix')
+        with col4:
             junction_color = st.color_picker('Colour', value='#00FFAA', key='junction_color')
 
 
