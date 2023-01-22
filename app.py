@@ -396,7 +396,7 @@ elif page == "Automatic":
 
 elif page == "Settings":
     with st.form(key='node_settings'):
-
+        st.subheader('Node settings')
         #node settings section
 
         st.markdown('**Junction settings**')
