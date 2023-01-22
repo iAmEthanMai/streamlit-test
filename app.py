@@ -410,8 +410,8 @@ elif page == "Settings":
         community_portal_cost = st.number_input('Community portal cost', value=NODE_COST, step=1000, min_value=0, max_value=1000000, key='community_portal_cost')
         community_portal_color = st.color_picker('Community portal color', value=NODE_COLOR, key='community_portal_color')
 
-        node_size = st.number_input('Node size', value=NODE_SIZE, step=10, min_value=0, max_value=1000, key='node_size')
-        
+        node_size = st.number_input('Node size', value=200, step=10, min_value=0, max_value=1000, key='node_size')
+
         if st.form_submit_button('Save'):
             st.write('Settings saved')
     
