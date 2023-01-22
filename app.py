@@ -572,13 +572,14 @@ elif page == "Settings":
     with st.form(key='pipe_settings'):
         st.subheader('Pipe settings')
         #pipe settings section
+        col1, col2, col3, col4 = st.columns(4)
+        pipe_width = st.number_input('Width', value=50, step=10, min_value=0, max_value=1000, key='pipe_width')
         st.markdown('**Unidirectional pipe settings**')
         col1, col2, col3, col4 = st.columns(4)
         with col1:
             pipe_cost = st.number_input('Cost ($/m)', value=PIPE_COST, step=1000, min_value=0, max_value=1000000, key='pipe_cost')
+
         with col2:
-            pipe_width = st.number_input('Width', value=50, step=10, min_value=0, max_value=1000, key='pipe_width')
-        with col3:
             pipe_id_prefix = st.text_input('ID prefix', value='PI', key='pipe_id_prefix')
         with col4:
             pipe_colour = st.color_picker('Colour', value='#00FFAA', key='pipe_colour')
@@ -590,9 +591,7 @@ elif page == "Settings":
         col1, col2, col3, col4 = st.columns(4)
         with col1:
             bipipe_cost = st.number_input('Cost ($/m)', value=PIPE_COST, step=1000, min_value=0, max_value=1000000, key='bipipe_cost')
-        with col2:
-            bipipe_width = st.number_input('Width', value=50, step=10, min_value=0, max_value=1000, key='bipipe_width')
-        with col3:
+       with col2:
             bipipe_id_prefix = st.text_input('ID prefix', value='PI', key='bipipe_id_prefix')
         with col4:
             bipipe_colour = st.color_picker('Colour', value='#00FFAA', key='bipipe_colour')
