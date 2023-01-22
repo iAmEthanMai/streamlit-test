@@ -165,7 +165,7 @@ st.markdown(hide_menu_style, unsafe_allow_html=True)
 
 
 
-if page == "Montreal":
+if page == "Manual":
 
     G = load_graph()
     
@@ -375,12 +375,11 @@ if page == "Montreal":
         
         st.download_button('Download network config', st.session_state.node_df.to_csv(), 'network_config.csv', 'text/csv')
 
-    
 
 
 
 
-elif page == "Austin":
+elif page == "Automatic":
     #st.title('Austin Network')
     view_state_austin = pdk.ViewState(
         latitude=30.2672,
