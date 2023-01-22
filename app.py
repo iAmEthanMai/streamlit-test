@@ -305,7 +305,8 @@ if page == "Manual":
             
             col4, col5 = st.columns(2)
             with col4:
-                node_type = st.selectbox('Node type', ['Home Portal', 'Comunity Portal', 'Junction'], on_change=st.experimental_rerun()) 
+                #node_type = st.selectbox('Node type', ['Home Portal', 'Comunity Portal', 'Junction'], on_change=st.experimental_rerun()) 
+                node_type = st.selectbox('Node type', ['Home Portal', 'Comunity Portal', 'Junction']) 
                 st.session_state.node_type = node_type
 
             with col5: 
