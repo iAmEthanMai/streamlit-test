@@ -397,10 +397,21 @@ elif page == "Automatic":
 elif page == "Settings":
     st.title('Settings')
     with st.form(key='node_settings'):
-        st.subheader('Node settings')
+        st.write('Node settings')
         #node settings section
+
         
-        node_cost = st.number_input('Node cost', value=NODE_COST, step=1000, min_value=0, max_value=1000000, key='node_cost')
+        junction_cost = st.number_input('Junction cost', value=NODE_COST, step=1000, min_value=0, max_value=1000000, key='junction_cost')
+        junction_color = st.color_picker('Junction color', value=NODE_COLOR, key='junction_color')
+
+        home_portal_cost = st.number_input('Homeportal cost', value=NODE_COST, step=1000, min_value=0, max_value=1000000, key='home_portal_cost')
+        home_portal_color = st.color_picker('Homeportal color', value=NODE_COLOR, key='home_portal_color')
+
+        community_portal_cost = st.number_input('Community portal cost', value=NODE_COST, step=1000, min_value=0, max_value=1000000, key='community_portal_cost')
+        community_portal_color = st.color_picker('Community portal color', value=NODE_COLOR, key='community_portal_color')
+
+        node_size = st.number_input('Node size', value=NODE_SIZE, step=10, min_value=0, max_value=1000, key='node_size')
+        
         if st.form_submit_button('Save'):
             st.write('Settings saved')
     
