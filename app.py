@@ -477,7 +477,7 @@ elif page == "Settings":
         with col1:
             junction_cost = st.number_input('Cost', value=NODE_COST, step=1000, min_value=0, max_value=1000000, key='junction_cost')
         with col2:
-            junction_radius = st.number_input('Radius', value=200, step=10, min_value=0, max_value=1000, key='junction_radius')
+            junction_radius = st.number_input('Radius', value=int(st.session_state.junction_radius), step=10, min_value=0, max_value=1000, key='junction_radius')
         with col3:
             junction_id_prefix = st.text_input('ID prefix', value=st.session_state.junction_id_prefix, key='junction_id_prefix')
         with col4:
