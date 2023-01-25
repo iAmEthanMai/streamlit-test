@@ -252,7 +252,6 @@ def render_map():
 
 
 
-def update_node():
 
 
 
