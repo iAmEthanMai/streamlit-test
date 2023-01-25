@@ -144,7 +144,20 @@ if 'home_portal_colour' not in st.session_state:
 
 
 
+if 'node_type' not in st.session_state:
+                st.session_state.node_type = 'Home Portal'
 
+if 'node_colour' not in st.session_state:
+    st.session_state.node_colour = NODE_COLO
+
+if 'node_radius' not in st.session_state:
+    st.session_state.node_radius = NODE_RADI
+
+if 'node_cost' not in st.session_state:
+    st.session_state.node_cost = NODE_CO
+
+if 'node_id_prefix' not in st.session_state:
+    st.session_state.node_id_prefix = st.session_state.home_portal_id_prefix
 
 
 
@@ -238,6 +251,11 @@ def render_map():
     st.pydeck_chart(r)
 
 
+
+def update_node():
+
+
+
 #MainMenu {visibility: hidden;}
 
 hide_menu_style = """
@@ -268,23 +286,70 @@ if page == "Manual":
     tab1, tab2, tab3, tab4, tab5 = st.tabs(["Add node", "Add pipe", "Delete node", "Delete pipe", "Load config"])
     data = np.random.randn(10, 1)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     with tab1:
 
+
+        with st.form(key='node_form'):
+
+            col1, col2 = st.columns(2)
+            with col1:
+                #node_type = st.selectbox('Node type', ['Home Portal', 'Comunity Portal', 'Junction'], on_change=st.experimental_rerun()) 
+                node_type = st.selectbox('Node type', ['Home Portal', 'Comunity Portal', 'Junction']) 
+                st.session_state.node_type = node_type
+            with col2:
+                button = st.form_submit_button(label='Update node')
+                if button:
+                    if node_type == 'Home Portal':
+                        st.session_state.node_colour = st.session_state.home_portal_colour
+                        st.session_state.node_radius = st.session_state.home_portal_radius
+                        st.session_state.node_cost = st.session_state.home_portal_cost
+                        st.session_state.node_id_prefix = st.session_state.home_portal_id_prefix
+                    elif node_type == 'Comunity Portal':
+                        st.session_state.node_colour = NODE_COLOUR
+                        st.session_state.node_radius = NODE_RADIUS
+                        st.session_state.node_cost = NODE_COST
+                        st.session_state.node_id_prefix = 'CP'
+                    elif node_type == 'Junction':
+                        st.session_state.node_colour = st.session_state.junction_colour
+                        st.session_state.node_radius = st.session_state.junction_radius
+                        st.session_state.node_cost = st.session_state.junction_cost
+                        st.session_state.node_id_prefix = st.session_state.junction_id_prefix
+                    st.experimental_rerun()
+
+
         with st.form(key='tab1'):
-            if 'node_type' not in st.session_state:
-                st.session_state.node_type = 'Home Portal'
-            
-            if 'node_colour' not in st.session_state:
-                st.session_state.node_colour = NODE_COLOUR
-
-            if 'node_radius' not in st.session_state:
-                st.session_state.node_radius = NODE_RADIUS
-
-            if 'node_cost' not in st.session_state:
-                st.session_state.node_cost = NODE_COST
-
-            if 'node_id_prefix' not in st.session_state:
-                st.session_state.node_id_prefix = st.session_state.home_portal_id_prefix
+           
             
             if st.session_state.node_type == 'Junction':
                 st.session_state.node_colour = st.session_state.junction_colour
@@ -294,11 +359,7 @@ if page == "Manual":
                 st.session_state.node_cost = st.session_state.home_portal_cost
                 st.session_state.node_id_prefix = st.session_state.home_portal_id_prefix
             
-            col4, col5 = st.columns(2)
-            with col4:
-                #node_type = st.selectbox('Node type', ['Home Portal', 'Comunity Portal', 'Junction'], on_change=st.experimental_rerun()) 
-                node_type = st.selectbox('Node type', ['Home Portal', 'Comunity Portal', 'Junction']) 
-                st.session_state.node_type = node_type
+           
 
             col1, col2, col3 = st.columns(3)
             with col1:
@@ -337,6 +398,33 @@ if page == "Manual":
                     )
 
                     st.experimental_rerun()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
