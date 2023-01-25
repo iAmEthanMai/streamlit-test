@@ -370,7 +370,7 @@ if page == "Manual":
             
 
 
-            with col5: 
+            
                 #color = st.color_picker('Colour', value='#5E29FF')
                 color = st.session_state.node_colour
                 color = hex_to_rgb(color)
