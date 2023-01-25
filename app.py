@@ -140,6 +140,18 @@ if 'home_portal_colour' not in st.session_state:
 
 
 
+if 'community_portal_cost' not in st.session_state:
+    st.session_state.community_portal_cost = NODE_COST
+
+if 'community_portal_radius' not in st.session_state:
+    st.session_state.community_portal_radius = NODE_RADIUS
+
+if 'community_portal_id_prefix' not in st.session_state:
+    st.session_state.community_portal_id_prefix = 'CP'
+
+if 'community_portal_colour' not in st.session_state:
+    st.session_state.community_portal_colour = NODE_COLOUR
+    
 
 
 
@@ -327,7 +339,7 @@ if page == "Manual":
                 node_type = st.selectbox('Node type', ['Home Portal', 'Comunity Portal', 'Junction']) 
                 st.session_state.node_type = node_type
             
-            button = st.form_submit_button(label='Update node')
+            button = st.form_submit_button(label='Update node type')
             if button:
                 if node_type == 'Home Portal':
                     st.session_state.node_colour = st.session_state.home_portal_colour
@@ -644,15 +656,15 @@ elif page == "Settings":
             st.session_state.junction_id_prefix = junction_id_prefix
             st.session_state.junction_colour = junction_colour
 
-#            st.session_state.home_portal_cost = home_portal_cost
-#            st.session_state.home_portal_radius = home_portal_radius
-#            st.session_state.home_portal_id_prefix = home_portal_id_prefix
-#            st.session_state.home_portal_colour = home_portal_colour
-#
-#            st.session_state.community_portal_cost = community_portal_cost
-#            st.session_state.community_portal_radius = community_portal_radius
-#            st.session_state.community_portal_id_prefix = community_portal_id_prefix
-#            st.session_state.community_portal_colour = community_portal_colour
+            st.session_state.home_portal_cost = home_portal_cost
+            st.session_state.home_portal_radius = home_portal_radius
+            st.session_state.home_portal_id_prefix = home_portal_id_prefix
+            st.session_state.home_portal_colour = home_portal_colour
+
+            st.session_state.community_portal_cost = community_portal_cost
+            st.session_state.community_portal_radius = community_portal_radius
+            st.session_state.community_portal_id_prefix = community_portal_id_prefix
+            st.session_state.community_portal_colour = community_portal_colour
 
             st.experimental_rerun()
     
