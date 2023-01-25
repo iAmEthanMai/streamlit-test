@@ -326,25 +326,25 @@ if page == "Manual":
                 #node_type = st.selectbox('Node type', ['Home Portal', 'Comunity Portal', 'Junction'], on_change=st.experimental_rerun()) 
                 node_type = st.selectbox('Node type', ['Home Portal', 'Comunity Portal', 'Junction']) 
                 st.session_state.node_type = node_type
-            with col2:
-                button = st.form_submit_button(label='Update node')
-                if button:
-                    if node_type == 'Home Portal':
-                        st.session_state.node_colour = st.session_state.home_portal_colour
-                        st.session_state.node_radius = st.session_state.home_portal_radius
-                        st.session_state.node_cost = st.session_state.home_portal_cost
-                        st.session_state.node_id_prefix = st.session_state.home_portal_id_prefix
-                    elif node_type == 'Comunity Portal':
-                        st.session_state.node_colour = NODE_COLOUR
-                        st.session_state.node_radius = NODE_RADIUS
-                        st.session_state.node_cost = NODE_COST
-                        st.session_state.node_id_prefix = 'CP'
-                    elif node_type == 'Junction':
-                        st.session_state.node_colour = st.session_state.junction_colour
-                        st.session_state.node_radius = st.session_state.junction_radius
-                        st.session_state.node_cost = st.session_state.junction_cost
-                        st.session_state.node_id_prefix = st.session_state.junction_id_prefix
-                    st.experimental_rerun()
+            
+            button = st.form_submit_button(label='Update node')
+            if button:
+                if node_type == 'Home Portal':
+                    st.session_state.node_colour = st.session_state.home_portal_colour
+                    st.session_state.node_radius = st.session_state.home_portal_radius
+                    st.session_state.node_cost = st.session_state.home_portal_cost
+                    st.session_state.node_id_prefix = st.session_state.home_portal_id_prefix
+                elif node_type == 'Comunity Portal':
+                    st.session_state.node_colour = NODE_COLOUR
+                    st.session_state.node_radius = NODE_RADIUS
+                    st.session_state.node_cost = NODE_COST
+                    st.session_state.node_id_prefix = 'CP'
+                elif node_type == 'Junction':
+                    st.session_state.node_colour = st.session_state.junction_colour
+                    st.session_state.node_radius = st.session_state.junction_radius
+                    st.session_state.node_cost = st.session_state.junction_cost
+                    st.session_state.node_id_prefix = st.session_state.junction_id_prefix
+                st.experimental_rerun()
 
 
         with st.form(key='tab1'):
