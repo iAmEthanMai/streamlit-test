@@ -657,12 +657,10 @@ elif page == "Settings":
             st.session_state.junction_colour = junction_colour
 
             st.session_state.home_portal_cost = home_portal_cost
-            st.session_state.home_portal_radius = home_portal_radius
             st.session_state.home_portal_id_prefix = home_portal_id_prefix
             st.session_state.home_portal_colour = home_portal_colour
 
             st.session_state.community_portal_cost = community_portal_cost
-            st.session_state.community_portal_radius = community_portal_radius
             st.session_state.community_portal_id_prefix = community_portal_id_prefix
             st.session_state.community_portal_colour = community_portal_colour
 
