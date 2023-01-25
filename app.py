@@ -151,7 +151,7 @@ if 'community_portal_id_prefix' not in st.session_state:
 
 if 'community_portal_colour' not in st.session_state:
     st.session_state.community_portal_colour = NODE_COLOUR
-    
+
 
 
 
@@ -160,13 +160,13 @@ if 'node_type' not in st.session_state:
                 st.session_state.node_type = 'Home Portal'
 
 if 'node_colour' not in st.session_state:
-    st.session_state.node_colour = NODE_COLO
+    st.session_state.node_colour = NODE_COLOUR
 
 if 'node_radius' not in st.session_state:
-    st.session_state.node_radius = NODE_RADI
+    st.session_state.node_radius = NODE_RADIUS
 
 if 'node_cost' not in st.session_state:
-    st.session_state.node_cost = NODE_CO
+    st.session_state.node_cost = NODE_COST
 
 if 'node_id_prefix' not in st.session_state:
     st.session_state.node_id_prefix = st.session_state.home_portal_id_prefix
