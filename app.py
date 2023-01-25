@@ -294,7 +294,12 @@ if page == "Manual":
                 st.session_state.node_cost = st.session_state.home_portal_cost
                 st.session_state.node_id_prefix = st.session_state.home_portal_id_prefix
             
-            
+            col4, col5 = st.columns(2)
+            with col4:
+                #node_type = st.selectbox('Node type', ['Home Portal', 'Comunity Portal', 'Junction'], on_change=st.experimental_rerun()) 
+                node_type = st.selectbox('Node type', ['Home Portal', 'Comunity Portal', 'Junction']) 
+                st.session_state.node_type = node_type
+
             col1, col2, col3 = st.columns(3)
             with col1:
                 lat = st.number_input('Latitude', min_value=0.0, max_value=90.0, value=45.532560)
@@ -303,11 +308,7 @@ if page == "Manual":
             with col3:
                 node_id = st.text_input('Node ID', value=st.session_state.node_id_prefix + str(st.session_state.node_id_count))
             
-            col4, col5 = st.columns(2)
-            with col4:
-                #node_type = st.selectbox('Node type', ['Home Portal', 'Comunity Portal', 'Junction'], on_change=st.experimental_rerun()) 
-                node_type = st.selectbox('Node type', ['Home Portal', 'Comunity Portal', 'Junction']) 
-                st.session_state.node_type = node_type
+
 
             with col5: 
                 #color = st.color_picker('Colour', value='#5E29FF')
@@ -545,7 +546,6 @@ elif page == "Settings":
         col1, col2, col3, col4 = st.columns(4)
         with col1:
             community_portal_cost = st.number_input('Cost', value=NODE_COST, step=1000, min_value=0, max_value=1000000, key='community_portal_cost')
-        
         with col2:
             community_portal_id_prefix = st.text_input('ID prefix', value='CP', key='community_portal_id_prefix')
         with col4:
