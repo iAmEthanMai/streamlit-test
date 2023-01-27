@@ -295,8 +295,10 @@ def add_node(node_id, lat, lon):
         get_position='position',
         get_color='color',
         get_radius=st.session_state.node_radius,
+    )
 
     st.experimental_rerun()
+
 
 
 
