@@ -283,6 +283,7 @@ def add_node(node_id, lat, lon):
         node_cost = st.session_state.community_portal_cost
         node_color = st.session_state.community_portal_color
 
+    node_color = hex_to_rgb(node_color)
     st.session_state.node_id_count += 1
     st.session_state.total_cost += node_cost
     st.session_state.node_df = st.session_state.node_df.append({'id': node_id, 'position': [lon, lat], 'color': node_color, 'length': 'None'}, ignore_index=True)
