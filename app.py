@@ -298,6 +298,7 @@ def add_node(node_id, lat, lon):
     )
 
     st.experimental_rerun()
+    return
 
 
 
