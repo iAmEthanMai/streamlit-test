@@ -335,7 +335,7 @@ if page == "Manual":
 
     #st.write(len(G))
     render_map()
-    st.write(st.session_state.node_df)
+    #st.write(st.session_state.node_df)
     
     tab1, tab2, tab3, tab4, tab5 = st.tabs(["Add node", "Add pipe", "Delete node", "Delete pipe", "Load config"])
     data = np.random.randn(10, 1)
@@ -404,7 +404,7 @@ if page == "Manual":
                 node_id = st.text_input('Node ID', value=st.session_state.node_id_prefix + str(st.session_state.node_id_count))
             
             charging_station = st.checkbox('Charging station')
-            
+
             if st.form_submit_button('Add node'):
                 #check if node is already at this location
                 if st.session_state.node_df['position'].isin([[lon, lat]]).any():
