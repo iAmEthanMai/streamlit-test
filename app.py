@@ -271,7 +271,7 @@ def render_map():
 
 
 
-def add_node(node_id, lat, lon):
+def add_node(node_id, lon, lat):
     type_ = st.session_state.node_type
     if type_ == 'Junction':
         node_cost = st.session_state.junction_cost
