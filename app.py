@@ -271,7 +271,7 @@ def render_map():
 
 
 
-def add_node(node_id, lon, lat):
+def add_node(node_id, lat, lon):
     type_ = st.session_state.node_type
     if type_ == 'Junction':
         node_cost = st.session_state.junction_cost
@@ -338,6 +338,7 @@ if page == "Manual":
 
     #st.write(len(G))
     render_map()
+    st.write(st.session_state.node_df)
     
     tab1, tab2, tab3, tab4, tab5 = st.tabs(["Add node", "Add pipe", "Delete node", "Delete pipe", "Load config"])
     data = np.random.randn(10, 1)
