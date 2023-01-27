@@ -383,28 +383,11 @@ if page == "Manual":
             button = st.form_submit_button(label='Update node type')
             if button:
                 st.session_state.node_type = node_type
-                #if node_type == 'Home Portal':
-                #    st.session_state.node_color = st.session_state.home_portal_color
-                #    st.session_state.node_radius = st.session_state.home_portal_radius
-                #    st.session_state.node_cost = st.session_state.home_portal_cost
-                #    st.session_state.node_id_prefix = st.session_state.home_portal_id_prefix
-                #elif node_type == 'Community Portal':
-                #    st.session_state.node_color = NODE_COLOR
-                #    st.session_state.node_radius = NODE_RADIUS
-                #    st.session_state.node_cost = NODE_COST
-                #    st.session_state.node_id_prefix = 'CP'
-                #elif node_type == 'Junction':
-                #    st.session_state.node_color = st.session_state.junction_color
-                #    st.session_state.node_radius = st.session_state.junction_radius
-                #    st.session_state.node_cost = st.session_state.junction_cost
-                #    st.session_state.node_id_prefix = st.session_state.junction_id_prefix
-                #st.experimental_rerun()
 
 
         with st.form(key='tab1'):
             
             if st.session_state.node_type == 'Junction':
-                
                 st.session_state.node_id_prefix = st.session_state.junction_id_prefix
             elif st.session_state.node_type == 'Home Portal':   
                 st.session_state.node_id_prefix = st.session_state.home_portal_id_prefix
@@ -420,18 +403,13 @@ if page == "Manual":
             with col3:
                 node_id = st.text_input('Node ID', value=st.session_state.node_id_prefix + str(st.session_state.node_id_count))
             
-
-
+            charging_station = st.checkbox('Charging station')
             
-                
-
             if st.form_submit_button('Add node'):
-                
                 #check if node is already at this location
                 if st.session_state.node_df['position'].isin([[lon, lat]]).any():
                     st.error('A node already exists at this location')
                 else:
-
                     add_node(node_id, lat, lon)
 
 
