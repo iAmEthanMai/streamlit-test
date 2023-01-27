@@ -275,7 +275,7 @@ def add_node(node_id, lat, lon):
     elif type_ == 'Home Portal':
         node_cost = st.session_state.home_portal_cost
         node_color = st.session_state.home_portal_color
-    elif type_ == 'Comunity Portal':
+    elif type_ == 'Community Portal':
         node_cost = st.session_state.community_portal_cost
         node_color = st.session_state.community_portal_color
 
@@ -379,7 +379,7 @@ if page == "Manual":
             col1, col2 = st.columns(2)
             with col1:
                 
-                node_type = st.selectbox('Node type', ['Home Portal', 'Comunity Portal', 'Junction']) 
+                node_type = st.selectbox('Node type', ['Home Portal', 'Community Portal', 'Junction']) 
             button = st.form_submit_button(label='Update node type')
             if button:
                 st.session_state.node_type = node_type
@@ -388,7 +388,7 @@ if page == "Manual":
                 #    st.session_state.node_radius = st.session_state.home_portal_radius
                 #    st.session_state.node_cost = st.session_state.home_portal_cost
                 #    st.session_state.node_id_prefix = st.session_state.home_portal_id_prefix
-                #elif node_type == 'Comunity Portal':
+                #elif node_type == 'Community Portal':
                 #    st.session_state.node_color = NODE_COLOR
                 #    st.session_state.node_radius = NODE_RADIUS
                 #    st.session_state.node_cost = NODE_COST
