@@ -38,7 +38,7 @@ import networkx as nx
 
 NODE_COST = 1000
 NODE_RADIUS = 200
-NODE_COLOUR = '#00FFAA'
+NODE_COLOR = '#00FFAA'
 NODE_ID_PREFIX = 'NO'
 
 
@@ -46,7 +46,7 @@ NODE_ID_PREFIX = 'NO'
 
 PIPE_COST = 10 #$/m
 PIPE_WIDTH = 50
-PIPE_COLUR = '#FF0000'
+PIPE_COLOR = '#FF0000'
 PIPE_ID_PREFIX = 'PI'
 
 
@@ -121,8 +121,8 @@ if 'junction_radius' not in st.session_state:
 if 'junction_id_prefix' not in st.session_state:
     st.session_state.junction_id_prefix = 'JU'
 
-if 'junction_colour' not in st.session_state:
-    st.session_state.junction_colour = NODE_COLOUR
+if 'junction_color' not in st.session_state:
+    st.session_state.junction_color = NODE_COLOR
 
 
 
@@ -135,8 +135,8 @@ if 'home_portal_radius' not in st.session_state:
 if 'home_portal_id_prefix' not in st.session_state:
     st.session_state.home_portal_id_prefix = 'HP'
 
-if 'home_portal_colour' not in st.session_state:
-    st.session_state.home_portal_colour = NODE_COLOUR
+if 'home_portal_color' not in st.session_state:
+    st.session_state.home_portal_color = NODE_COLOR
 
 
 
@@ -149,8 +149,8 @@ if 'community_portal_radius' not in st.session_state:
 if 'community_portal_id_prefix' not in st.session_state:
     st.session_state.community_portal_id_prefix = 'CP'
 
-if 'community_portal_colour' not in st.session_state:
-    st.session_state.community_portal_colour = NODE_COLOUR
+if 'community_portal_color' not in st.session_state:
+    st.session_state.community_portal_color = NODE_COLOR
 
 
 
@@ -159,8 +159,8 @@ if 'community_portal_colour' not in st.session_state:
 if 'node_type' not in st.session_state:
                 st.session_state.node_type = 'Home Portal'
 
-if 'node_colour' not in st.session_state:
-    st.session_state.node_colour = NODE_COLOUR
+if 'node_color' not in st.session_state:
+    st.session_state.node_color = NODE_COLOR
 
 if 'node_radius' not in st.session_state:
     st.session_state.node_radius = NODE_RADIUS
@@ -267,6 +267,48 @@ def render_map():
 
 
 
+
+
+
+
+def add_node(node_id, lat, lon):
+    type_ = st.session_state.node_type
+    if type_ == 'Junction':
+        node_cost = st.session_state.junction_cost
+        node_color = st.session_state.junction_color
+    elif type_ == 'Home Portal':
+        node_cost = st.session_state.home_portal_cost
+        node_color = st.session_state.home_portal_color
+    elif type_ == 'Community Portal':
+        node_cost = st.session_state.community_portal_cost
+        node_color = st.session_state.community_portal_color
+
+    st.session_state.node_id_count += 1
+    st.session_state.total_cost += node_cost
+    st.session_state.node_df = st.session_state.node_df.append({'id': node_id, 'position': [lon, lat], 'color': node_color, 'length': 'None'}, ignore_index=True)
+    st.session_state.scatter_layer = pdk.Layer(
+        "ScatterplotLayer",
+        data=st.session_state.node_df,
+        pickable=True,
+        #make cursor pointy
+        auto_highlight=True,
+        get_position='position',
+        get_color='color',
+        get_radius=st.session_state.node_radius,
+
+    st.experimental_rerun()
+
+
+
+
+
+
+
+
+
+
+
+
 #MainMenu {visibility: hidden;}
 
 hide_menu_style = """
@@ -335,42 +377,39 @@ if page == "Manual":
 
             col1, col2 = st.columns(2)
             with col1:
-                #node_type = st.selectbox('Node type', ['Home Portal', 'Comunity Portal', 'Junction'], on_change=st.experimental_rerun()) 
+                
                 node_type = st.selectbox('Node type', ['Home Portal', 'Comunity Portal', 'Junction']) 
-                st.session_state.node_type = node_type
-            
             button = st.form_submit_button(label='Update node type')
             if button:
-                if node_type == 'Home Portal':
-                    st.session_state.node_colour = st.session_state.home_portal_colour
-                    st.session_state.node_radius = st.session_state.home_portal_radius
-                    st.session_state.node_cost = st.session_state.home_portal_cost
-                    st.session_state.node_id_prefix = st.session_state.home_portal_id_prefix
-                elif node_type == 'Comunity Portal':
-                    st.session_state.node_colour = NODE_COLOUR
-                    st.session_state.node_radius = NODE_RADIUS
-                    st.session_state.node_cost = NODE_COST
-                    st.session_state.node_id_prefix = 'CP'
-                elif node_type == 'Junction':
-                    st.session_state.node_colour = st.session_state.junction_colour
-                    st.session_state.node_radius = st.session_state.junction_radius
-                    st.session_state.node_cost = st.session_state.junction_cost
-                    st.session_state.node_id_prefix = st.session_state.junction_id_prefix
-                st.experimental_rerun()
+                st.session_state.node_type = node_type
+                #if node_type == 'Home Portal':
+                #    st.session_state.node_color = st.session_state.home_portal_color
+                #    st.session_state.node_radius = st.session_state.home_portal_radius
+                #    st.session_state.node_cost = st.session_state.home_portal_cost
+                #    st.session_state.node_id_prefix = st.session_state.home_portal_id_prefix
+                #elif node_type == 'Comunity Portal':
+                #    st.session_state.node_color = NODE_COLOR
+                #    st.session_state.node_radius = NODE_RADIUS
+                #    st.session_state.node_cost = NODE_COST
+                #    st.session_state.node_id_prefix = 'CP'
+                #elif node_type == 'Junction':
+                #    st.session_state.node_color = st.session_state.junction_color
+                #    st.session_state.node_radius = st.session_state.junction_radius
+                #    st.session_state.node_cost = st.session_state.junction_cost
+                #    st.session_state.node_id_prefix = st.session_state.junction_id_prefix
+                #st.experimental_rerun()
 
 
         with st.form(key='tab1'):
-           
             
             if st.session_state.node_type == 'Junction':
-                st.session_state.node_colour = st.session_state.junction_colour
+                
                 st.session_state.node_id_prefix = st.session_state.junction_id_prefix
-            elif st.session_state.node_type == 'Home Portal':
-                st.session_state.node_colour = st.session_state.home_portal_colour
-                st.session_state.node_cost = st.session_state.home_portal_cost
+            elif st.session_state.node_type == 'Home Portal':   
                 st.session_state.node_id_prefix = st.session_state.home_portal_id_prefix
+            elif st.session_state.node_type == 'Community Portal':
+                st.session_state.node_id_prefix = st.session_state.community_portal_id_prefix
             
-           
 
             col1, col2, col3 = st.columns(3)
             with col1:
@@ -383,9 +422,7 @@ if page == "Manual":
 
 
             
-                #color = st.color_picker('Colour', value='#5E29FF')
-                color = st.session_state.node_colour
-                color = hex_to_rgb(color)
+                
 
             if st.form_submit_button('Add node'):
                 
@@ -394,21 +431,7 @@ if page == "Manual":
                     st.error('A node already exists at this location')
                 else:
 
-                    st.session_state.node_id_count += 1
-                    st.session_state.total_cost += st.session_state.node_cost
-                    st.session_state.node_df = st.session_state.node_df.append({'id': node_id, 'position': [lon, lat], 'color': color, 'length': 'None'}, ignore_index=True)
-                    st.session_state.scatter_layer = pdk.Layer(
-                        "ScatterplotLayer",
-                        data=st.session_state.node_df,
-                        pickable=True,
-                        #make cursor pointy
-                        auto_highlight=True,
-                        get_position='position',
-                        get_color='color',
-                        get_radius=st.session_state.node_radius,
-                    )
-
-                    st.experimental_rerun()
+                    add_node(node_id, lat, lon)
 
 
 
@@ -452,7 +475,7 @@ if page == "Manual":
             with col3:
                 pipe_id = st.text_input('Pipe ID', value='PI' + str(len(st.session_state.pipe_df)))
             with col4:
-                color = st.color_picker('Colour', value='#5E29FF')
+                color = st.color_picker('Color', value='#5E29FF')
                 color = hex_to_rgb(color)
             
             
@@ -627,7 +650,7 @@ elif page == "Settings":
         with col2:
             junction_id_prefix = st.text_input('ID prefix', value=st.session_state.junction_id_prefix, key='junction_id_prefix_input')
         with col4:
-            junction_colour = st.color_picker('Colour', value=st.session_state.junction_colour, key='junction_color_input')
+            junction_color = st.color_picker('Color', value=st.session_state.junction_color, key='junction_color_input')
 
 
         st.markdown('**Home portal settings**')
@@ -638,7 +661,7 @@ elif page == "Settings":
         with col2:
             home_portal_id_prefix = st.text_input('ID prefix', value='HP', key='home_portal_id_prefix_input')
         with col4:
-            home_portal_colour = st.color_picker('Colour', value='#00FFAA', key='home_portal_colour_input')
+            home_portal_color = st.color_picker('Color', value='#00FFAA', key='home_portal_color_input')
 
 
         st.markdown('**Community portal settings**')
@@ -648,21 +671,21 @@ elif page == "Settings":
         with col2:
             community_portal_id_prefix = st.text_input('ID prefix', value='CP', key='community_portal_id_prefix_input')
         with col4:
-            community_portal_colour = st.color_picker('Colour', value='#00FFAA', key='community_portal_colour_input')
+            community_portal_color = st.color_picker('Color', value='#00FFAA', key='community_portal_color_input')
 
         
         if st.form_submit_button('Save'):
             st.session_state.junction_cost = junction_cost
             st.session_state.junction_id_prefix = junction_id_prefix
-            st.session_state.junction_colour = junction_colour
+            st.session_state.junction_color = junction_color
 
             st.session_state.home_portal_cost = home_portal_cost
             st.session_state.home_portal_id_prefix = home_portal_id_prefix
-            st.session_state.home_portal_colour = home_portal_colour
+            st.session_state.home_portal_color = home_portal_color
 
             st.session_state.community_portal_cost = community_portal_cost
             st.session_state.community_portal_id_prefix = community_portal_id_prefix
-            st.session_state.community_portal_colour = community_portal_colour
+            st.session_state.community_portal_color = community_portal_color
 
             st.experimental_rerun()
     
@@ -682,7 +705,7 @@ elif page == "Settings":
         with col2:
             pipe_id_prefix = st.text_input('ID prefix', value='PI', key='pipe_id_prefix')
         with col4:
-            pipe_colour = st.color_picker('Colour', value='#00FFAA', key='pipe_colour')
+            pipe_color = st.color_picker('Color', value='#00FFAA', key='pipe_color')
 
         
 
@@ -694,7 +717,7 @@ elif page == "Settings":
         with col2:
             bipipe_id_prefix = st.text_input('ID prefix', value='PI', key='bipipe_id_prefix')
         with col4:
-            bipipe_colour = st.color_picker('Colour', value='#00FFAA', key='bipipe_colour')
+            bipipe_color = st.color_picker('Color', value='#00FFAA', key='bipipe_color')
 
         if st.form_submit_button('Save'):
             st.success('Pipe settings saved')
