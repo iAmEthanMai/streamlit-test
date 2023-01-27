@@ -267,10 +267,6 @@ def render_map():
 
 
 
-
-
-
-
 def add_node(node_id, lat, lon):
     type_ = st.session_state.node_type
     if type_ == 'Junction':
@@ -291,11 +287,10 @@ def add_node(node_id, lat, lon):
         "ScatterplotLayer",
         data=st.session_state.node_df,
         pickable=True,
-        #make cursor pointy
         auto_highlight=True,
         get_position='position',
         get_color='color',
-        get_radius=200,
+        get_radius=st.session_state.node_radius,
     )
 
     st.experimental_rerun()
