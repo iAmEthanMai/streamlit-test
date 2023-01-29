@@ -32,7 +32,7 @@ import networkx as nx
 
 
 
-
+CHARGING_COST = 500
 
 
 
@@ -52,7 +52,7 @@ PIPE_ID_PREFIX = 'PI'
 
 
 
-data1 = [['Alice', [-73.597650,45.522920], [94, 41, 255],'None'],['Ethan',[-73.615480,45.522560], [94, 41, 255],'None']]
+data1 = [['Alice', [-73.597650,45.522920], [94, 41, 255],'None', 1000],['Ethan',[-73.615480,45.522560], [94, 41, 255],'None', 1000]]
 
 
 
@@ -61,7 +61,7 @@ data1 = [['Alice', [-73.597650,45.522920], [94, 41, 255],'None'],['Ethan',[-73.6
 
 
 if 'node_df' not in st.session_state:
-    st.session_state.node_df = pd.DataFrame(data1, columns=['id','position','color','length'])
+    st.session_state.node_df = pd.DataFrame(data1, columns=['id','position','color','length', 'cost'])
 
 if 'pipe_df' not in st.session_state:
     st.session_state.pipe_df = pd.DataFrame([], columns=['id', 'color', 'path', 'length', 'bidirectional'])
@@ -267,7 +267,7 @@ def render_map():
 
 
 
-def add_node(node_id, lat, lon):
+def add_node(node_id, lat, lon, charching):
     type_ = st.session_state.node_type
     if type_ == 'Junction':
         node_cost = st.session_state.junction_cost
@@ -282,8 +282,12 @@ def add_node(node_id, lat, lon):
     node_color = hex_to_rgb(node_color)
 
     st.session_state.node_id_count += 1
+
+    if charching:
+        node_cost += CHARGING_COST
+
     st.session_state.total_cost += node_cost
-    st.session_state.node_df = st.session_state.node_df.append({'id': node_id, 'position': [lon, lat], 'color': node_color, 'length': 'None'}, ignore_index=True)
+    st.session_state.node_df = st.session_state.node_df.append({'id': node_id, 'position': [lon, lat], 'color': node_color, 'length': 'None', 'cost': node_cost}), ignore_index=True)
     st.session_state.scatter_layer = pdk.Layer(
         "ScatterplotLayer",
         data=st.session_state.node_df,
@@ -295,9 +299,25 @@ def add_node(node_id, lat, lon):
     )
 
     st.experimental_rerun()
-    return
+    
 
 
+
+def delete_node(node_id):
+    node_cost = st.session_state.node_df[st.session_state.node_df['id'] == node_id]['cost'].values[0]
+    st.session_state.node_df = st.session_state.node_df[st.session_state.node_df['id'] != node_id]
+    st.session_state.total_cost -= node_cost
+    st.session_state.scatter_layer = pdk.Layer(
+        "ScatterplotLayer",
+        data=st.session_state.node_df,
+        pickable=True,
+        #make cursor pointy
+        auto_highlight=True,
+        get_position='position',
+        get_color='color',
+        get_radius=200,
+    )
+    st.experimental_rerun()
 
 
 
@@ -526,19 +546,8 @@ if page == "Manual":
         #wait for user to press enter
             if st.form_submit_button('Delete node'):
                 #TODO delete pipes contected to node
-                st.session_state.node_df = st.session_state.node_df[st.session_state.node_df['id'] != node_id]
-                st.session_state.total_cost -= NODE_COST
-                st.session_state.scatter_layer = pdk.Layer(
-                    "ScatterplotLayer",
-                    data=st.session_state.node_df,
-                    pickable=True,
-                    #make cursor pointy
-                    auto_highlight=True,
-                    get_position='position',
-                    get_color='color',
-                    get_radius=200,
-                )
-                st.experimental_rerun()
+                delete_node(node_id)
+                
         
     with tab4:
         pipe_id = st.selectbox('Pipe ID', st.session_state.pipe_df['id'], key='tab41')
