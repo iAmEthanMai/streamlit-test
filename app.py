@@ -61,10 +61,10 @@ data1 = [['Alice', [-73.597650,45.522920], [94, 41, 255],'None', 1000],['Ethan',
 
 
 if 'node_df' not in st.session_state:
-    st.session_state.node_df = pd.DataFrame(data1, columns=['id','position','color','length', 'cost'])
+    st.session_state.node_df = pd.DataFrame(data1, columns=['id','position','color','info', 'cost'])
 
 if 'pipe_df' not in st.session_state:
-    st.session_state.pipe_df = pd.DataFrame([], columns=['id', 'color', 'path', 'length', 'bidirectional'])
+    st.session_state.pipe_df = pd.DataFrame([], columns=['id', 'color', 'path', 'info', 'bidirectional'])
 
 
 if 'total_length' not in st.session_state:
@@ -246,19 +246,15 @@ def hex_to_rgb(h):
 
 
 def render_map():
-
     view_state = pdk.ViewState(
         latitude=45.5019,
         longitude=-73.5674,
         zoom=10
     )
 
-
     #tooltip id and length if you hover over a pipe
-    tooltip = {"html": "<b>ID:</b> {id} <br/> <b>Length:</b> {length}", "style": {"color": "white"}} 
-    
+    tooltip = {"html": "<b>ID:</b> {id} <br/> <b>info:</b> {info}", "style": {"color": "white"}} 
     r = pdk.Deck(layers=[st.session_state.scatter_layer, st.session_state.path_layer], initial_view_state=view_state, tooltip=tooltip)
-
 
     st.pydeck_chart(r)
 
@@ -287,7 +283,7 @@ def add_node(node_id, lat, lon, charching):
         node_cost += CHARGING_COST
 
     st.session_state.total_cost += node_cost
-    st.session_state.node_df = st.session_state.node_df.append({'id': node_id, 'position': [lon, lat], 'color': node_color, 'length': 'None', 'cost': node_cost}, ignore_index=True)
+    st.session_state.node_df = st.session_state.node_df.append({'id': node_id, 'position': [lon, lat], 'color': node_color, 'info': 'None', 'cost': node_cost}, ignore_index=True)
     
     st.session_state.scatter_layer = pdk.Layer(
         "ScatterplotLayer",
@@ -300,7 +296,6 @@ def add_node(node_id, lat, lon, charching):
     )
 
     st.experimental_rerun()
-    
 
 
 
@@ -521,7 +516,7 @@ if page == "Manual":
                         path_coords.append([x, y])
                     
                     #update df id color path
-                    st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id, 'color': color, 'path': path_coords, 'length': str(round(length,2))+'m', 'bidirectional': bidirectional}, ignore_index=True)
+                    st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id, 'color': color, 'path': path_coords, 'info': "length: " + str(round(length,2))+'m', 'bidirectional': bidirectional}, ignore_index=True)
                     st.session_state.path_layer = pdk.Layer(
                         "PathLayer",
                         data=st.session_state.pipe_df,
