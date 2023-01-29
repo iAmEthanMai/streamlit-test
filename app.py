@@ -287,7 +287,7 @@ def add_node(node_id, lat, lon, charching):
         node_cost += CHARGING_COST
 
     st.session_state.total_cost += node_cost
-    st.session_state.node_df.append({'id': node_id, 'position': [lon, lat], 'color': node_color, 'length': 'None', 'cost': node_cost}, ignore_index=True)
+    st.session_state.node_df = st.session_state.node_df.append({'id': node_id, 'position': [lon, lat], 'color': node_color, 'length': 'None', 'cost': node_cost}, ignore_index=True)
     
     st.session_state.scatter_layer = pdk.Layer(
         "ScatterplotLayer",
