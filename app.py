@@ -432,7 +432,7 @@ if page == "Manual":
                 if st.session_state.node_df['position'].isin([[lon, lat]]).any():
                     st.error('A node already exists at this location')
                 else:
-                    add_node(node_id, lat, lon)
+                    add_node(node_id, lat, lon, charging_station)
 
 
 
