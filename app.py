@@ -357,7 +357,7 @@ if page == "Manual":
 
     #st.write(len(G))
     render_map()
-    #st.write(st.session_state.node_df)
+    st.write(st.session_state.node_df)
     
     tab1, tab2, tab3, tab4, tab5 = st.tabs(["Add node", "Add pipe", "Delete node", "Delete pipe", "Load config"])
     data = np.random.randn(10, 1)
