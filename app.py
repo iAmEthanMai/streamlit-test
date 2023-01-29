@@ -305,7 +305,8 @@ def add_node(node_id, lat, lon, charching):
 
 def delete_node(node_id):
     node_cost = st.session_state.node_df[st.session_state.node_df['id'] == node_id]['cost'].values[0]
-    st.session_state.node_df = st.session_state.node_df[st.session_state.node_df['id'] != node_id]
+    node_df = st.session_state.node_df[st.session_state.node_df['id'] != node_id]
+    st.session_state.node_df = node_df
     st.session_state.total_cost -= node_cost
     st.session_state.scatter_layer = pdk.Layer(
         "ScatterplotLayer",
