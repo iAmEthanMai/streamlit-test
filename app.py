@@ -263,7 +263,7 @@ def render_map():
 
 
 
-def add_node(lat, lon, charging=False, node_id=None):
+def add_node(lat, lon, charging=False, node_id=None, reload=True):
     type_ = st.session_state.node_type
     if node_id is None:
         node_id = f'JU{st.session_state.node_id_count}'
@@ -302,8 +302,8 @@ def add_node(lat, lon, charging=False, node_id=None):
         get_color='color',
         get_radius='radius',
     )
-
-    st.experimental_rerun()
+    if reload:
+        st.experimental_rerun()
 
 
 
@@ -519,9 +519,10 @@ if page == "Manual":
                     st.session_state.total_length += length
                     #st.write(path)
                     path_coords = []
+                    
                     for point in path:
                         x, y = G.nodes[point]['x'], G.nodes[point]['y']
-                        add_node(y, x)
+                        add_node(y, x, reload=False)
                         path_coords.append([x, y])
                     
                     #update df id color path
