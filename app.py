@@ -287,7 +287,7 @@ def add_node(lat, lon, charging=False, node_id=None):
 
     st.session_state.node_id_count += 1
 
-    if charching:
+    if charging:
         node_cost += CHARGING_COST
 
     st.session_state.total_cost += node_cost
