@@ -61,7 +61,7 @@ data1 = [['Alice', [-73.597650,45.522920], [94, 41, 255],'None', 1000],['Ethan',
 
 
 if 'node_df' not in st.session_state:
-    st.session_state.node_df = pd.DataFrame(data1, columns=['id','position','color','info', 'cost'])
+    st.session_state.node_df = pd.DataFrame(data1, columns=['id','position','color','info', 'cost', 'radius'])
 
 if 'pipe_df' not in st.session_state:
     st.session_state.pipe_df = pd.DataFrame([], columns=['id', 'color', 'path', 'info', 'bidirectional'])
@@ -263,8 +263,10 @@ def render_map():
 
 
 
-def add_node(node_id, lat, lon, charching):
+def add_node(lat, lon, charching, node_id=None):
     type_ = st.session_state.node_type
+    if node_id is None:
+        node_id = f'{st.session_state.node_id_prefix}{st.session_state.node_id_count}'
     if type_ == 'Junction':
         node_cost = st.session_state.junction_cost
         node_color = st.session_state.junction_color
@@ -283,7 +285,7 @@ def add_node(node_id, lat, lon, charching):
         node_cost += CHARGING_COST
 
     st.session_state.total_cost += node_cost
-    st.session_state.node_df = st.session_state.node_df.append({'id': node_id, 'position': [lon, lat], 'color': node_color, 'info': 'None', 'cost': node_cost}, ignore_index=True)
+    st.session_state.node_df = st.session_state.node_df.append({'id': node_id, 'position': [lon, lat], 'color': node_color, 'info': 'None', 'cost': node_cost, 'radius': 100}, ignore_index=True)
     
     st.session_state.scatter_layer = pdk.Layer(
         "ScatterplotLayer",
@@ -292,7 +294,7 @@ def add_node(node_id, lat, lon, charching):
         auto_highlight=True,
         get_position='position',
         get_color='color',
-        get_radius=200,
+        get_radius='radius',
     )
 
     st.experimental_rerun()
@@ -427,7 +429,7 @@ if page == "Manual":
                 if st.session_state.node_df['position'].isin([[lon, lat]]).any():
                     st.error('A node already exists at this location')
                 else:
-                    add_node(node_id, lat, lon, charging_station)
+                    add_node(lat, lon, charging_station, node_id = node_id)
 
 
 
