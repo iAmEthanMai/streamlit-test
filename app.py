@@ -254,7 +254,7 @@ def render_map():
 
     #tooltip id and length if you hover over a pipe
     tooltip = {"html": "<b>ID:</b> {id} <br/> <b>info:</b> {info}", "style": {"color": "white"}} 
-    r = pdk.Deck(layers=[st.session_state.scatter_layer, st.session_state.path_layer], initial_view_state=view_state, tooltip=tooltip)
+    r = pdk.Deck(layers=[st.session_state.path_layer, st.session_state.scatter_layer], initial_view_state=view_state, tooltip=tooltip)
 
     st.pydeck_chart(r)
 
