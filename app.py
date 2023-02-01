@@ -522,10 +522,15 @@ if page == "Manual":
                     #st.write(path)
                     path_coords = []
                     
-                    for point in path:
+                    
+
+                    for i, point in enumarate(path):
+
                         x, y = G.nodes[point]['x'], G.nodes[point]['y']
-                        add_node(y, x, intermadiate=True)
                         path_coords.append([x, y])
+                        if i != 0 or i != len(path)-1:
+                            add_node(y, x, intermadiate=True)
+                        
                     
                     #update df id color path
                     st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id, 'color': color, 'path': path_coords, 'info': "length: " + str(round(length,2))+'m', 'bidirectional': bidirectional}, ignore_index=True)
