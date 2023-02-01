@@ -524,7 +524,7 @@ if page == "Manual":
                     
                     
 
-                    for i, point in enumarate(path):
+                    for i, point in enumerate(path):
 
                         x, y = G.nodes[point]['x'], G.nodes[point]['y']
                         path_coords.append([x, y])
