@@ -263,10 +263,10 @@ def render_map():
 
 
 
-def add_node(lat, lon, charching, node_id=None):
+def add_node(lat, lon, charging=False, node_id=None):
     type_ = st.session_state.node_type
-    #if node_id is None:
-    #    node_id = f'{st.session_state.node_id_prefix}{st.session_state.node_id_count}'
+    if node_id is None:
+        node_id = f'JU{st.session_state.node_id_count}'
 
     if type_ == 'Junction':
         node_cost = st.session_state.junction_cost
@@ -435,7 +435,7 @@ if page == "Manual":
                 if st.session_state.node_df['position'].isin([[lon, lat]]).any():
                     st.error('A node already exists at this location')
                 else:
-                    add_node(lat, lon, charging_station, node_id = node_id)
+                    add_node(lat, lon, charging = charging_station, node_id = node_id)
 
 
 
@@ -521,6 +521,7 @@ if page == "Manual":
                     path_coords = []
                     for point in path:
                         x, y = G.nodes[point]['x'], G.nodes[point]['y']
+                        add_node(y, x)
                         path_coords.append([x, y])
                     
                     #update df id color path
