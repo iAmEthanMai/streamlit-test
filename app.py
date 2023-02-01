@@ -629,11 +629,6 @@ elif page == "Automatic":
 elif page == "Settings":
     with st.form(key='node_settings'):
         st.subheader('Node settings')
-        #node settings section
-        col1, col2, col3, col4 = st.columns(4)
-        with col1: 
-            node_radius = st.number_input('Radius', value=NODE_RADIUS, step=10, min_value=0, max_value=1000, key='radius_input') 
-        
 
         
         st.markdown('**Junction settings**')
