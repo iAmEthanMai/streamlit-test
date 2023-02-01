@@ -263,10 +263,12 @@ def render_map():
 
 
 
-def add_node(lat, lon, charging=False, node_id=None, reload=True):
+def add_node(lat, lon, charging=False, node_id=None, intermadiate=False):
     type_ = st.session_state.node_type
-    if node_id is None:
+    if intermadiate:
         node_id = f'JU{st.session_state.node_id_count}'
+        type_ = 'Junction'
+
 
     if type_ == 'Junction':
         node_cost = st.session_state.junction_cost
@@ -302,7 +304,7 @@ def add_node(lat, lon, charging=False, node_id=None, reload=True):
         get_color='color',
         get_radius='radius',
     )
-    if reload:
+    if not intermadiate:
         st.experimental_rerun()
 
 
@@ -522,7 +524,7 @@ if page == "Manual":
                     
                     for point in path:
                         x, y = G.nodes[point]['x'], G.nodes[point]['y']
-                        add_node(y, x, reload=False)
+                        add_node(y, x, intermadiate=True)
                         path_coords.append([x, y])
                     
                     #update df id color path
