@@ -531,7 +531,7 @@ if page == "Manual":
             with col2:
                 nodeB = st.selectbox('Destination', st.session_state.node_df['id'])
             with col3:
-                pipe_id = st.text_input('Pipe ID', value='PI' + str(len(st.session_state.pipe_df)))
+                pipe_id = st.text_input('Pipe ID', value=st.session_state.pipe_id_prefix + str(len(st.session_state.pipe_df)))
             with col4:
                 color = st.color_picker('Color', value='#5E29FF')
                 color = hex_to_rgb(color)
