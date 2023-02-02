@@ -542,8 +542,8 @@ if page == "Manual":
 
                     paths = list(zip(path_coords, path_coords[1:]))
 
-                    for path in paths:
-                        st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id, 'color': color, 'path': path_coords, 'info': "length: " + str(round(length,2))+'m', 'bidirectional': bidirectional}, ignore_index=True)
+                    for i, section in enumerate(paths):
+                        st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id + '_' + str(i), 'color': color, 'path': section, 'info': "length: " + str(round(length,2))+'m', 'bidirectional': bidirectional}, ignore_index=True)
                         st.session_state.path_layer = pdk.Layer(
                             "PathLayer",
                             data=st.session_state.pipe_df,
