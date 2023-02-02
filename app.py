@@ -269,6 +269,13 @@ def add_node(lat, lon, charging=False, node_id=None, intermadiate=False):
         node_id = f'JU{st.session_state.node_id_count}'
         type_ = 'Junction'
 
+        #check if node is already in graph by checking lat and lon
+        #for node in st.session_state.node_df.iterrows():
+        #    if node['x'] == lon and node['y'] == lat:
+        #        return
+
+
+
 
     if type_ == 'Junction':
         node_cost = st.session_state.junction_cost
@@ -532,18 +539,21 @@ if page == "Manual":
                             add_node(y, x, intermadiate=True)
                         
                     
-                    #update df id color path
-                    st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id, 'color': color, 'path': path_coords, 'info': "length: " + str(round(length,2))+'m', 'bidirectional': bidirectional}, ignore_index=True)
-                    st.session_state.path_layer = pdk.Layer(
-                        "PathLayer",
-                        data=st.session_state.pipe_df,
-                        pickable=True,
-                        #make cursor pointy
-                        auto_highlight=True,
-                        get_path='path',
-                        get_color='color',
-                        get_width=50,
-                    )
+
+                    paths = list(zip(path_coords, path_coords[1:]))
+
+                    for path in paths:
+                        st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id, 'color': color, 'path': path_coords, 'info': "length: " + str(round(length,2))+'m', 'bidirectional': bidirectional}, ignore_index=True)
+                        st.session_state.path_layer = pdk.Layer(
+                            "PathLayer",
+                            data=st.session_state.pipe_df,
+                            pickable=True,
+                            #make cursor pointy
+                            auto_highlight=True,
+                            get_path='path',
+                            get_color='color',
+                            get_width=50,
+                        )
                     #st.session_state.total_cost += PIPE_COST
                     st.experimental_rerun()
             else:
