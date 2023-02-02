@@ -266,7 +266,7 @@ def render_map():
 def add_node(lat, lon, charging=False, node_id=None, intermediate=False):
     type_ = st.session_state.node_type
     if intermediate:
-        node_id = f'JU{st.session_state.node_id_count}'
+        node_id = f'JU-{st.session_state.node_id_count}'
         type_ = 'Junction'
 
         #check if node is already in graph by checking lat and lon
@@ -722,7 +722,7 @@ elif page == "Settings":
             pipe_cost = st.number_input('Cost ($/m)', value=PIPE_COST, step=5, min_value=0, max_value=1000000, key='pipe_cost')
 
         with col2:
-            pipe_id_prefix = st.text_input('ID prefix', value='PI', key='pipe_id_prefix')
+            pipe_id_prefix = st.text_input('ID prefix', value='PI-', key='pipe_id_prefix')
         with col4:
             pipe_color = st.color_picker('Color', value='#00FFAA', key='pipe_color')
 
@@ -734,7 +734,7 @@ elif page == "Settings":
         with col1:
             bipipe_cost = st.number_input('Cost ($/m)', value=PIPE_COST, step=5, min_value=0, max_value=1000000, key='bipipe_cost')
         with col2:
-            bipipe_id_prefix = st.text_input('ID prefix', value='PI', key='bipipe_id_prefix')
+            bipipe_id_prefix = st.text_input('ID prefix', value='PI-', key='bipipe_id_prefix')
         with col4:
             bipipe_color = st.color_picker('Color', value='#00FFAA', key='bipipe_color')
 
