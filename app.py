@@ -39,7 +39,7 @@ CHARGING_COST = 500
 NODE_COST = 1000
 NODE_RADIUS = 100
 NODE_COLOR = '#00FFAA'
-NODE_ID_PREFIX = 'NO'
+NODE_ID_PREFIX = 'NO-'
 
 
 
@@ -47,7 +47,7 @@ NODE_ID_PREFIX = 'NO'
 PIPE_COST = 10 #$/m
 PIPE_WIDTH = 50
 PIPE_COLOR = '#FF0000'
-PIPE_ID_PREFIX = 'PI'
+PIPE_ID_PREFIX = 'PI-'
 
 
 
@@ -119,7 +119,7 @@ if 'junction_radius' not in st.session_state:
     st.session_state.junction_radius = NODE_RADIUS
 
 if 'junction_id_prefix' not in st.session_state:
-    st.session_state.junction_id_prefix = 'JU'
+    st.session_state.junction_id_prefix = 'JU-'
 
 if 'junction_color' not in st.session_state:
     st.session_state.junction_color = NODE_COLOR
@@ -133,7 +133,7 @@ if 'home_portal_radius' not in st.session_state:
     st.session_state.home_portal_radius = NODE_RADIUS
 
 if 'home_portal_id_prefix' not in st.session_state:
-    st.session_state.home_portal_id_prefix = 'HP'
+    st.session_state.home_portal_id_prefix = 'HP-'
 
 if 'home_portal_color' not in st.session_state:
     st.session_state.home_portal_color = NODE_COLOR
@@ -147,7 +147,7 @@ if 'community_portal_radius' not in st.session_state:
     st.session_state.community_portal_radius = NODE_RADIUS
 
 if 'community_portal_id_prefix' not in st.session_state:
-    st.session_state.community_portal_id_prefix = 'CP'
+    st.session_state.community_portal_id_prefix = 'CP-'
 
 if 'community_portal_color' not in st.session_state:
     st.session_state.community_portal_color = NODE_COLOR
@@ -263,7 +263,7 @@ def render_map():
 
 
 
-def add_node(lat, lon, charging=False, node_id=None, intermadiate=False):
+def add_node(lat, lon, charging=False, node_id=None, intermediate=False):
     type_ = st.session_state.node_type
     if intermadiate:
         node_id = f'JU{st.session_state.node_id_count}'
@@ -311,7 +311,7 @@ def add_node(lat, lon, charging=False, node_id=None, intermadiate=False):
         get_color='color',
         get_radius='radius',
     )
-    if not intermadiate:
+    if not intermediate:
         st.experimental_rerun()
 
 
@@ -334,6 +334,51 @@ def delete_node(node_id):
     st.experimental_rerun()
 
 
+
+def add_pipe(source_id, destination_id, pipe_id, color, bidirectional):
+    lonA = st.session_state.node_df[st.session_state.node_df['id'] == source_id]['position'].values[0][1]
+    latA = st.session_state.node_df[st.session_state.node_df['id'] == source_id]['position'].values[0][0]
+    lonB = st.session_state.node_df[st.session_state.node_df['id'] == destination_id]['position'].values[0][1]
+    latB = st.session_state.node_df[st.session_state.node_df['id'] == destination_id]['position'].values[0][0]
+
+
+    source = ox.get_nearest_node(G, (lonA, latA))
+    
+    destination = ox.get_nearest_node(G, (lonB, latB))
+    
+    
+    path = nx.shortest_path(G, source, destination, weight='length')
+    length = nx.shortest_path_length(G, source, destination, weight='length')
+    st.session_state.total_cost += length * PIPE_COST
+    st.session_state.total_length += length
+    #st.write(path)
+    path_coords = []
+    
+    
+
+    for i, point in enumerate(path):
+
+        x, y = G.nodes[point]['x'], G.nodes[point]['y']
+        path_coords.append([x, y])
+        if i != 0 or i != len(path)-1:
+            add_node(y, x, intermediate=True)
+        
+    
+
+    paths = list(zip(path_coords, path_coords[1:]))
+
+    for i, section in enumerate(paths):
+        st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id + '_' + str(i), 'color': color, 'path': section, 'info': "length: " + str(round(length,2))+'m', 'bidirectional': bidirectional}, ignore_index=True)
+        st.session_state.path_layer = pdk.Layer(
+            "PathLayer",
+            data=st.session_state.pipe_df,
+            pickable=True,
+            #make cursor pointy
+            auto_highlight=True,
+            get_path='path',
+            get_color='color',
+            get_width=50,
+        )
 
 
 
@@ -511,49 +556,7 @@ if page == "Manual":
             #check if nodeA and nodeB are different
             if nodeA != nodeB:
                 if st.form_submit_button('Add pipe'):
-                    lonA = st.session_state.node_df[st.session_state.node_df['id'] == nodeA]['position'].values[0][1]
-                    latA = st.session_state.node_df[st.session_state.node_df['id'] == nodeA]['position'].values[0][0]
-                    lonB = st.session_state.node_df[st.session_state.node_df['id'] == nodeB]['position'].values[0][1]
-                    latB = st.session_state.node_df[st.session_state.node_df['id'] == nodeB]['position'].values[0][0]
-
-
-                    source = ox.get_nearest_node(G, (lonA, latA))
-                    
-                    destination = ox.get_nearest_node(G, (lonB, latB))
-                    
-                    
-                    path = nx.shortest_path(G, source, destination, weight='length')
-                    length = nx.shortest_path_length(G, source, destination, weight='length')
-                    st.session_state.total_cost += length * PIPE_COST
-                    st.session_state.total_length += length
-                    #st.write(path)
-                    path_coords = []
-                    
-                    
-
-                    for i, point in enumerate(path):
-
-                        x, y = G.nodes[point]['x'], G.nodes[point]['y']
-                        path_coords.append([x, y])
-                        if i != 0 or i != len(path)-1:
-                            add_node(y, x, intermadiate=True)
-                        
-                    
-
-                    paths = list(zip(path_coords, path_coords[1:]))
-
-                    for i, section in enumerate(paths):
-                        st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id + '_' + str(i), 'color': color, 'path': section, 'info': "length: " + str(round(length,2))+'m', 'bidirectional': bidirectional}, ignore_index=True)
-                        st.session_state.path_layer = pdk.Layer(
-                            "PathLayer",
-                            data=st.session_state.pipe_df,
-                            pickable=True,
-                            #make cursor pointy
-                            auto_highlight=True,
-                            get_path='path',
-                            get_color='color',
-                            get_width=50,
-                        )
+                    add_pipe(nodeA, nodeB, pipe_id, color, bidirectional) 
                     #st.session_state.total_cost += PIPE_COST
                     st.experimental_rerun()
             else:
