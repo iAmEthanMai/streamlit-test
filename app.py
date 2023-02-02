@@ -37,7 +37,7 @@ CHARGING_COST = 500
 
 
 NODE_COST = 1000
-NODE_RADIUS = 200
+NODE_RADIUS = 100
 NODE_COLOR = '#00FFAA'
 NODE_ID_PREFIX = 'NO'
 
@@ -657,7 +657,7 @@ elif page == "Settings":
         with col2:
             junction_id_prefix = st.text_input('ID prefix', value=st.session_state.junction_id_prefix, key='junction_id_prefix_input')
         with col3:
-            junction_radius = st.number_input('Radius', value=200, step=10, min_value=0, max_value=1000, key='junction_radius_input')
+            junction_radius = st.number_input('Radius', value=st.session_state.junction_radius, step=10, min_value=0, max_value=1000, key='junction_radius_input')
         with col4:
             junction_color = st.color_picker('Color', value=st.session_state.junction_color, key='junction_color_input')
 
@@ -669,7 +669,7 @@ elif page == "Settings":
         with col2:
             home_portal_id_prefix = st.text_input('ID prefix', value='HP', key='home_portal_id_prefix_input')
         with col3:
-            home_portal_radius = st.number_input('Radius', value=200, step=10, min_value=0, max_value=1000, key='home_portal_radius_input')
+            home_portal_radius = st.number_input('Radius', value=st.session_state.home_portal_radius, step=10, min_value=0, max_value=1000, key='home_portal_radius_input')
         with col4:
             home_portal_color = st.color_picker('Color', value='#00FFAA', key='home_portal_color_input')
 
@@ -681,7 +681,7 @@ elif page == "Settings":
         with col2:
             community_portal_id_prefix = st.text_input('ID prefix', value='CP', key='community_portal_id_prefix_input')
         with col3:
-            community_portal_radius = st.number_input('Radius', value=200, step=10, min_value=0, max_value=1000, key='community_portal_radius_input')
+            community_portal_radius = st.number_input('Radius', value=st.session_state.community_portal_radius, step=10, min_value=0, max_value=1000, key='community_portal_radius_input')
         with col4:
             community_portal_color = st.color_picker('Color', value='#00FFAA', key='community_portal_color_input')
 
