@@ -265,7 +265,7 @@ def render_map():
 
 def add_node(lat, lon, charging=False, node_id=None, intermediate=False):
     type_ = st.session_state.node_type
-    if intermadiate:
+    if intermediate:
         node_id = f'JU{st.session_state.node_id_count}'
         type_ = 'Junction'
 
@@ -670,7 +670,7 @@ elif page == "Settings":
         with col1:
             home_portal_cost = st.number_input('Cost', value=NODE_COST, step=1000, min_value=0, max_value=1000000, key='home_portal_cost_input')
         with col2:
-            home_portal_id_prefix = st.text_input('ID prefix', value='HP', key='home_portal_id_prefix_input')
+            home_portal_id_prefix = st.text_input('ID prefix', value=st.session_state.home_portal_id_prefix, key='home_portal_id_prefix_input')
         with col3:
             home_portal_radius = st.number_input('Radius', value=st.session_state.home_portal_radius, step=10, min_value=0, max_value=1000, key='home_portal_radius_input')
         with col4:
@@ -682,7 +682,7 @@ elif page == "Settings":
         with col1:
             community_portal_cost = st.number_input('Cost', value=NODE_COST, step=1000, min_value=0, max_value=1000000, key='community_portal_cost_input')
         with col2:
-            community_portal_id_prefix = st.text_input('ID prefix', value='CP', key='community_portal_id_prefix_input')
+            community_portal_id_prefix = st.text_input('ID prefix', value=st.session_state.community_portal_id_prefix, key='community_portal_id_prefix_input')
         with col3:
             community_portal_radius = st.number_input('Radius', value=st.session_state.community_portal_radius, step=10, min_value=0, max_value=1000, key='community_portal_radius_input')
         with col4:
