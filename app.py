@@ -259,12 +259,9 @@ def render_map():
     st.pydeck_chart(r)
 
 
-def get_shortest_path(source_x, source_y, destination_x, destination_y):
-    source = ox.get_nearest_node(G, (source_y, source_x))
-    destination = ox.get_nearest_node(G, (destination_y, destination_x))
-    path = nx.shortest_path(G, source, destination, weight='length')
-    length = nx.shortest_path_length(G, source, destination, weight='length')
-    return path, length
+
+
+############## Nodes functions ##############
 
 
 
@@ -342,20 +339,62 @@ def delete_node(node_id):
 
 
 
+
+
+
+############## Pipe functions ##############
+
+
+
+
+
+
+def get_shortest_path(source_x, source_y, destination_x, destination_y):
+    source = ox.get_nearest_node(G, (source_y, source_x))
+    destination = ox.get_nearest_node(G, (destination_y, destination_x))
+    path = nx.shortest_path(G, source, destination, weight='length')
+    length = nx.shortest_path_length(G, source, destination, weight='length')
+    return path, length
+
+
+def get_pipe_stats(source_id, destination_id):
+    source_y = st.session_state.node_df[st.session_state.node_df['id'] == source_id]['position'].values[0][1]
+    source_x = st.session_state.node_df[st.session_state.node_df['id'] == source_id]['position'].values[0][0]
+    destination_y = st.session_state.node_df[st.session_state.node_df['id'] == destination_id]['position'].values[0][1]
+    destination_x = st.session_state.node_df[st.session_state.node_df['id'] == destination_id]['position'].values[0][0]
+    
+    path, length = get_shortest_path(source_x, source_y, destination_x, destination_y)
+    elevation_profile = []
+    #for coord in path:
+    #    elevation_profile.append(G.nodes[coord]['elevation'])
+
+    elevation_gain = round(max(elevation_profile) - min(elevation_profile),2)
+
+
+    if len(path) > 3:
+        number_of_intermediate_junctions = len(path) - 2
+    elif len(path) == 3:
+        number_of_intermediate_junctions = 1
+    else:
+        number_of_intermediate_junctions = 0
+    
+    intermediate_junctions_cost = number_of_intermediate_junctions * st.session_state.junction_cost
+    pipe_cost = length * PIPE_COST
+
+    total_cost = pipe_cost + intermediate_junctions_cost
+    
+
+
+
+
+
+
+
 def add_pipe(source_id, destination_id, pipe_id, color, bidirectional):
     source_y = st.session_state.node_df[st.session_state.node_df['id'] == source_id]['position'].values[0][1]
     source_x = st.session_state.node_df[st.session_state.node_df['id'] == source_id]['position'].values[0][0]
     destination_y = st.session_state.node_df[st.session_state.node_df['id'] == destination_id]['position'].values[0][1]
     destination_x = st.session_state.node_df[st.session_state.node_df['id'] == destination_id]['position'].values[0][0]
-    #
-    #
-    #source = ox.get_nearest_node(G, (lonA, latA))
-    #
-    #destination = ox.get_nearest_node(G, (lonB, latB))
-    #
-    #
-    #path = nx.shortest_path(G, source, destination, weight='length')
-    #length = nx.shortest_path_length(G, source, destination, weight='length')
     
     path, length = get_shortest_path(source_x, source_y, destination_x, destination_y)
 
