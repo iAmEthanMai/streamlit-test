@@ -259,6 +259,13 @@ def render_map():
     st.pydeck_chart(r)
 
 
+def get_shortest_path(source_x, source_y, destination_x, destination_y):
+    source = ox.get_nearest_node(G, (source_y, source_x))
+    destination = ox.get_nearest_node(G, (destination_y, destination_x))
+    path = nx.shortest_path(G, source, destination, weight='length')
+    length = nx.shortest_path_length(G, source, destination, weight='length')
+    return path, length
+
 
 
 
@@ -336,19 +343,22 @@ def delete_node(node_id):
 
 
 def add_pipe(source_id, destination_id, pipe_id, color, bidirectional):
-    lonA = st.session_state.node_df[st.session_state.node_df['id'] == source_id]['position'].values[0][1]
-    latA = st.session_state.node_df[st.session_state.node_df['id'] == source_id]['position'].values[0][0]
-    lonB = st.session_state.node_df[st.session_state.node_df['id'] == destination_id]['position'].values[0][1]
-    latB = st.session_state.node_df[st.session_state.node_df['id'] == destination_id]['position'].values[0][0]
+    source_x = st.session_state.node_df[st.session_state.node_df['id'] == source_id]['position'].values[0][1]
+    source_y = st.session_state.node_df[st.session_state.node_df['id'] == source_id]['position'].values[0][0]
+    destination_x = st.session_state.node_df[st.session_state.node_df['id'] == destination_id]['position'].values[0][1]
+    destination_y = st.session_state.node_df[st.session_state.node_df['id'] == destination_id]['position'].values[0][0]
+    #
+    #
+    #source = ox.get_nearest_node(G, (lonA, latA))
+    #
+    #destination = ox.get_nearest_node(G, (lonB, latB))
+    #
+    #
+    #path = nx.shortest_path(G, source, destination, weight='length')
+    #length = nx.shortest_path_length(G, source, destination, weight='length')
+    
+    path, length = get_shortest_path(source_x, source_y, destination_x, destination_y)
 
-
-    source = ox.get_nearest_node(G, (lonA, latA))
-    
-    destination = ox.get_nearest_node(G, (lonB, latB))
-    
-    
-    path = nx.shortest_path(G, source, destination, weight='length')
-    length = nx.shortest_path_length(G, source, destination, weight='length')
     st.session_state.total_cost += length * PIPE_COST
     st.session_state.total_length += length
     #st.write(path)
@@ -368,7 +378,9 @@ def add_pipe(source_id, destination_id, pipe_id, color, bidirectional):
     paths = list(zip(path_coords, path_coords[1:]))
 
     for i, section in enumerate(paths):
-        st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id + '_' + str(i), 'color': color, 'path': section, 'info': "length: " + str(round(length,2))+'m', 'bidirectional': bidirectional}, ignore_index=True)
+        section_source, section_destination = section
+        _, section_length = get_shortest_path(section_source[0], section_source[1], section_destination[0], section_destination[1])
+        st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id + '_' + str(i), 'color': color, 'path': section, 'info': "length: " + str(round(section_length,2))+'m', 'bidirectional': bidirectional}, ignore_index=True)
         st.session_state.path_layer = pdk.Layer(
             "PathLayer",
             data=st.session_state.pipe_df,
