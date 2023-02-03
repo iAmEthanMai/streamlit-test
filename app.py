@@ -445,6 +445,8 @@ def add_pipe(source_id, destination_id, pipe_id, color, bidirectional):
     for point in path:
         x, y = G.nodes[point]['x'], G.nodes[point]['y']
         path_coords.append([x, y])
+    
+    path_coords.append([destination_x, destination_y])
 
     st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id, 'color': color, 'path': path_coords, 'info': "length: " + str(round(length,2))+'m', 'bidirectional': bidirectional}, ignore_index=True)
     st.session_state.path_layer = pdk.Layer(
@@ -458,7 +460,7 @@ def add_pipe(source_id, destination_id, pipe_id, color, bidirectional):
         get_width=10,
     )
 
-    
+
 
 
 
