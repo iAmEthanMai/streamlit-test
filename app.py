@@ -12,7 +12,7 @@ import osmnx as ox
 import pickle
 import networkx as nx
 
-
+import math
 
 
 
@@ -359,6 +359,11 @@ def delete_node(node_id):
 def get_shortest_path(source_x, source_y, destination_x, destination_y):
     source = ox.get_nearest_node(G, (source_y, source_x))
     destination = ox.get_nearest_node(G, (destination_y, destination_x))
+
+    if source == destination:
+        distance = math.sqrt((source_x - destination_x)**2 + (source_y - destination_y)**2)
+        return [source, destination], distance
+
     path = nx.shortest_path(G, source, destination, weight='length')
     length = nx.shortest_path_length(G, source, destination, weight='length')
     return path, length
@@ -446,7 +451,7 @@ def add_pipe(source_id, destination_id, pipe_id, color, bidirectional):
         x, y = G.nodes[point]['x'], G.nodes[point]['y']
         path_coords.append([x, y])
     
-    path_coords.append([destination_x, destination_y])
+    #path_coords.append([destination_x, destination_y])
 
     st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id, 'color': color, 'path': path_coords, 'info': "length: " + str(round(length,2))+'m', 'bidirectional': bidirectional}, ignore_index=True)
     st.session_state.path_layer = pdk.Layer(
