@@ -411,35 +411,56 @@ def add_pipe(source_id, destination_id, pipe_id, color, bidirectional):
     
     
     
+#    path_coords = []
+#    
+#    
+#
+#    for i, point in enumerate(path):
+#
+#        x, y = G.nodes[point]['x'], G.nodes[point]['y']
+#        path_coords.append([x, y])
+#        if i != 0 or i != len(path)-1:
+#            add_node(y, x, intermediate=True)
+#        
+#    
+#
+#    paths = list(zip(path_coords, path_coords[1:]))
+#
+#    for i, section in enumerate(paths):
+#        section_source, section_destination = section
+#        _, section_length = get_shortest_path(section_source[0], section_source[1], section_destination[0], section_destination[1])
+#        st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id + '_' + str(i), 'color': color, 'path': section, 'info': "length: " + str(round(section_length,2))+'m', 'bidirectional': bidirectional}, ignore_index=True)
+#        st.session_state.path_layer = pdk.Layer(
+#            "PathLayer",
+#            data=st.session_state.pipe_df,
+#            pickable=True,
+#            #make cursor pointy
+#            auto_highlight=True,
+#            get_path='path',
+#            get_color='color',
+#            get_width=50,
+#        )
+
     path_coords = []
-    
-    
-
-    for i, point in enumerate(path):
-
+    for point in path:
         x, y = G.nodes[point]['x'], G.nodes[point]['y']
         path_coords.append([x, y])
-        if i != 0 or i != len(path)-1:
-            add_node(y, x, intermediate=True)
-        
+
+    st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id, 'color': color, 'path': path_coords, 'info': "length: " + str(round(length,2))+'m', 'bidirectional': bidirectional}, ignore_index=True)
+    st.session_state.path_layer = pdk.Layer(
+        "PathLayer",
+        data=st.session_state.pipe_df,
+        pickable=True,
+        #make cursor pointy
+        auto_highlight=True,
+        get_path='path',
+        get_color='color',
+        get_width=10,
+    )
+
     
 
-    paths = list(zip(path_coords, path_coords[1:]))
 
-    for i, section in enumerate(paths):
-        section_source, section_destination = section
-        _, section_length = get_shortest_path(section_source[0], section_source[1], section_destination[0], section_destination[1])
-        st.session_state.pipe_df = st.session_state.pipe_df.append({'id': pipe_id + '_' + str(i), 'color': color, 'path': section, 'info': "length: " + str(round(section_length,2))+'m', 'bidirectional': bidirectional}, ignore_index=True)
-        st.session_state.path_layer = pdk.Layer(
-            "PathLayer",
-            data=st.session_state.pipe_df,
-            pickable=True,
-            #make cursor pointy
-            auto_highlight=True,
-            get_path='path',
-            get_color='color',
-            get_width=50,
-        )
 
 
 
