@@ -362,7 +362,7 @@ def get_shortest_path(source_x, source_y, destination_x, destination_y):
 
     if source == destination:
         distance = math.sqrt((source_x - destination_x)**2 + (source_y - destination_y)**2)
-        return [source, destination], distance
+        return [[source_x, source_y], [destination_x, destination_y]], distance
 
     path = nx.shortest_path(G, source, destination, weight='length')
     length = nx.shortest_path_length(G, source, destination, weight='length')
