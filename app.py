@@ -52,8 +52,8 @@ PIPE_ID_PREFIX = 'PI-'
 
 
 
-data1 = [['Alice', [-73.597650,45.522920], [94, 41, 255],'None', 1000, 100],['Ethan',[-73.615480,45.522560], [94, 41, 255],'None', 1000, 100]]
-
+#data1 = [['Alice', [-73.597650,45.522920], [94, 41, 255],'None', 1000, 100],['Ethan',[-73.615480,45.522560], [94, 41, 255],'None', 1000, 100]]
+data1 = [['Alice', [-84.220701,33.963581], [94, 41, 255],'None', 1000, 100],['Ethan',[-84.219794,33.962877], [94, 41, 255],'None', 1000, 100]]
 
 
 
@@ -224,7 +224,8 @@ page = st.sidebar.radio("", ["Manual", "Automatic", "Settings"])
 
 @st.cache(allow_output_mutation=True)
 def load_graph():
-    return ox.load_graphml('simplified.graphml') 
+    #return ox.load_graphml('simplified.graphml') 
+    return ox.load_graphml('PTC.graphml') 
     
 
 
@@ -246,9 +247,15 @@ def hex_to_rgb(h):
 
 
 def render_map():
+    #view_state = pdk.ViewState(
+    #    latitude=45.5019,
+    #    longitude=-73.5674,
+    #    zoom=10
+    #)
+
     view_state = pdk.ViewState(
-        latitude=45.5019,
-        longitude=-73.5674,
+        latitude=33.962877,
+        longitude=-84.219794,
         zoom=10
     )
 
@@ -382,7 +389,7 @@ def get_pipe_stats(source_id, destination_id):
     pipe_cost = length * PIPE_COST
 
     total_cost = pipe_cost + intermediate_junctions_cost
-    
+
 
 
 
