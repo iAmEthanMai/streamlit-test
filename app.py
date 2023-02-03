@@ -343,10 +343,10 @@ def delete_node(node_id):
 
 
 def add_pipe(source_id, destination_id, pipe_id, color, bidirectional):
-    source_x = st.session_state.node_df[st.session_state.node_df['id'] == source_id]['position'].values[0][1]
-    source_y = st.session_state.node_df[st.session_state.node_df['id'] == source_id]['position'].values[0][0]
-    destination_x = st.session_state.node_df[st.session_state.node_df['id'] == destination_id]['position'].values[0][1]
-    destination_y = st.session_state.node_df[st.session_state.node_df['id'] == destination_id]['position'].values[0][0]
+    source_y = st.session_state.node_df[st.session_state.node_df['id'] == source_id]['position'].values[0][1]
+    source_x = st.session_state.node_df[st.session_state.node_df['id'] == source_id]['position'].values[0][0]
+    destination_y = st.session_state.node_df[st.session_state.node_df['id'] == destination_id]['position'].values[0][1]
+    destination_x = st.session_state.node_df[st.session_state.node_df['id'] == destination_id]['position'].values[0][0]
     #
     #
     #source = ox.get_nearest_node(G, (lonA, latA))
@@ -362,6 +362,9 @@ def add_pipe(source_id, destination_id, pipe_id, color, bidirectional):
     st.session_state.total_cost += length * PIPE_COST
     st.session_state.total_length += length
     #st.write(path)
+    
+    
+    
     path_coords = []
     
     
