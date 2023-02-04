@@ -228,7 +228,7 @@ page = st.sidebar.radio("", ["Manual", "Automatic", "Settings"])
 @st.cache(allow_output_mutation=True)
 def load_graph():
     #return ox.load_graphml('simplified.graphml') 
-    return ox.load_graphml('PTC.graphml') 
+    return ox.load_graphml('PeachTreeCorner.graphml') 
     
 
 
