@@ -450,6 +450,7 @@ def add_pipe(source_id, destination_id, pipe_id, color, bidirectional):
 #        )
 
     path_coords = []
+    path_coords.append([source_x, source_y])
     for point in path:
         x, y = G.nodes[point]['x'], G.nodes[point]['y']
         path_coords.append([x, y])
