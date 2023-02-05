@@ -854,6 +854,8 @@ elif page == "Account":
         if st.form_submit_button('Login'):
             st.session_state.username = username
             st.session_state.token = token
+            st.success('Logged in as {}'.format(username))
+            time.sleep(1)
             if not st.session_state.logged_in:
                 st.session_state.logged_in = True
             st.experimental_rerun()
