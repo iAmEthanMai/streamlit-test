@@ -265,7 +265,7 @@ def render_map():
     view_state = pdk.ViewState(
         latitude=33.962877,
         longitude=-84.219794,
-        zoom=50
+        zoom=20
     )
 
     #tooltip id and length if you hover over a pipe
