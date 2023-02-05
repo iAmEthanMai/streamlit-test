@@ -64,7 +64,7 @@ if 'logged_in' not in st.session_state:
     st.session_state.logged_in = False
 
 if 'username' not in st.session_state:
-    st.session_state.username = ''
+    st.session_state.username = 'iAmEthanMai'
 
 if 'token' not in st.session_state:
     st.session_state.token = ''
@@ -847,7 +847,7 @@ elif page == "Account":
         st.subheader('Login')
         col1, col2 = st.columns(2)
         with col1:
-            username = st.text_input('Github username', key='username')
+            username = st.text_input('Github username', value=st.session_state.username, key='username')
         with col2:
             token = st.text_input('Access token', key='token', type='password')
 
