@@ -60,8 +60,14 @@ data1 = [['1', [-84.220701,33.963581], [94, 41, 255],'None', 1000, 10],['2',[-84
 
 
 
+if 'logged_in' not in st.session_state:
+    st.session_state.logged_in = False
 
+if 'username' not in st.session_state:
+    st.session_state.username = ''
 
+if 'token' not in st.session_state:
+    st.session_state.token = ''
 
 if 'node_df' not in st.session_state:
     st.session_state.node_df = pd.DataFrame(data1, columns=['id','position','color','info', 'cost', 'radius'])
@@ -217,7 +223,7 @@ st.set_page_config(
 
 #make tab menu
 st.sidebar.title('Pipedream Networks')
-page = st.sidebar.radio("", ["Manual", "Automatic", "Settings"])
+page = st.sidebar.radio("", ["Manual", "Automatic", "Settings", "Account"])
 
 
 
@@ -836,5 +842,18 @@ elif page == "Settings":
         if st.form_submit_button('Save'):
             st.success('Pipe settings saved')
 
-    
+elif page == "Account":
+    with st.form(key='login_form'):
+        st.subheader('Login')
+        col1, col2 = st.columns(2)
+        with col1:
+            username = st.text_input('Github username', key='username')
+        with col2:
+            token = st.text_input('Access token', key='token', type='password')
 
+        if st.form_submit_button('Login'):
+            st.session_state.username = username
+            st.session_state.token = token
+            if not st.session_state.logged_in:
+                st.session_state.logged_in = True
+            st.experimental_rerun()
