@@ -847,9 +847,9 @@ elif page == "Account":
         st.subheader('Login')
         col1, col2 = st.columns(2)
         with col1:
-            username = st.text_input('Github username', value=st.session_state.username, key='username')
+            username = st.text_input('Github username', value=st.session_state.username, key='username_input')
         with col2:
-            token = st.text_input('Access token', key='token', type='password')
+            token = st.text_input('Access token', key='token_input', type='password')
 
         if st.form_submit_button('Login'):
             st.session_state.username = username
