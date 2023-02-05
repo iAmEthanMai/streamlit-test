@@ -506,6 +506,9 @@ st.markdown(hide_menu_style, unsafe_allow_html=True)
 
 
 if page == "Manual":
+    if not st.session_state.logged_in:
+        st.write("Please log in")
+        st.stop()
 
     G = load_graph()
     
